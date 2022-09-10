@@ -1,0 +1,56 @@
+@media (min-width: 992px){
+.searchmainnav{
+	width: 500px !important;
+	/* max-width: 500px; */
+} }
+.fainbox{
+	font-size: 20px;
+	transition: transform ease 300ms;
+	position: relative;
+  top: 0;
+}
+.fainbox:hover{
+	transform: translate(0, -10px);
+}
+
+.offcanvas-header{
+	margin-top: 20px;
+	margin-right: 20px;
+}
+
+.btn-close{
+	font-size: 23px;
+}
+
+@media screen and (max-width: 576px) {
+	.searchmainnav{
+		width: 280px !important;
+	}
+}
+
+
+@media screen and (min-width: 577px) {
+	.searchmainnav{
+		width: 260px !important;
+	}
+}
+
+
+@media screen and (min-width: 768px) {
+  .searchmainnav{
+		width: 180px !important;
+	}
+}
+
+
+@media screen and (min-width: 992px) {
+  .searchmainnav{
+		width: 280px !important;
+	}
+}
+
+@media screen and (min-width: 1140px) {
+  .searchmainnav{
+		width: 380px !important;
+	}
+}

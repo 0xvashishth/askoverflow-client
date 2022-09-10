@@ -1,0 +1,32 @@
+.bottom-margin {
+  margin-bottom : 20px;
+}
+
+.border-post-answer{
+  border : 1px solid black;
+}
+
+.left-margin-post-answer {
+  display : inline-block;
+  margin-left : 20px;
+}
+
+.ul-style {
+  list-style: none;
+  list-style-type: none;
+}
+
+#header-strip ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  color: black;
+  width: 100%;
+  list-style-type: none;
+}
+
+#header-strip li {
+ margin:0 2%;
+}
+
+

@@ -2,23 +2,99 @@ import React from "react";
 import "./NavBar.css";
 import { Profileinlarge1 } from "../ProfileContent/profile";
 import $ from "jquery";
+import { useState } from "react";
+import { useCookies } from 'react-cookie';
 
 let countloginsignup = 0
 
 const NavForHome = (props) => {
   // const book = props.book;
+  const [user, setUser] = useState({
+    username: "", password: ""
+  });
+
+  const [cookies, setCookie] = useCookies(['user']);
+
   var well = {
     boxShadow: "0px 4px 0px 0px #f0f0f0"
   }
   const submitdataforloginorsignup = () => {
-    var tempvar = $("#loginuserconfirmidtochange").attr("name");
-    console.log(tempvar)
+    var chckorloginorsignupvariable = $("#loginuserconfirmidtochange").attr("name");
+    if (chckorloginorsignupvariable == "loginuserconfirm") {
+      if (user.username == "" || user.password == "") {
+        console.log("not eligible for login");
+      } else {
+        let usernameget = user.username;
+        let passwordget = user.password;
+        const postLoginData = async () => {
+          // e.preventDefault();
+          const res = await fetch("https://askoverflow-server.vashishth-patel.repl.co/signin", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              username: usernameget, password: passwordget
+            }),
+          })
+          const resjson = await res.json();
+          if (res.status === 201) {
+            console.log(resjson.jwttokenloginuser);
+            setCookie('jwttokenloginuser', resjson.jwttokenloginuser, {
+              expires: new Date(Date.now() + 60000),
+            });
+            window.alert(resjson.message);
+          } else {
+            window.alert(resjson.error);
+          }
+        }
+        postLoginData();
+      }
+
+    } else if (chckorloginorsignupvariable == "signupuserconfirm") {
+      let namesign = $(".nameremove1").val();
+      let emailsign = $(".emailremove1").val();
+      let usernamesign = $("#user-usernamename").val();
+      let passwordsign = $("#user-password").val();
+
+      if (!namesign || !emailsign || !usernamesign || !passwordsign || namesign == "" || emailsign == "" || usernamesign == "" || passwordsign == "") {
+        console.log("not eligible for signup");
+      } else {
+        const postSignData = async () => {
+          // e.preventDefault();
+          const res = await fetch("https://askoverflow-server.vashishth-patel.repl.co/signup", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              name: namesign, email: emailsign, username: usernamesign, password: passwordsign
+            }),
+          })
+          const resjson = await res.json();
+          if (res.status === 201) {
+            window.alert(resjson.message);
+          } else {
+            window.alert(resjson.error);
+          }
+        }
+        postSignData();
+      }
+    }
+  }
+
+  let name, value;
+  const handleInputs = (e) => {
+    name = e.target.name;
+    value = e.target.value
+    setUser({ ...user, [name]: value });
   }
 
   const signupmodalclick = () => {
     if (countloginsignup % 2 === 0) {
-      var nameinput = "<div class='form-group'><input required type='text' class='nameremove1 form-control' id='user-name' placeholder='Name..'/></div>";
-      var emailinput = "<div class='form-group'><input required type='email' class='emailremove1 form-control' id='email-name' placeholder='Email..'/></div>";
+      var nameinput = `<div class='form-group'><input required type='text' class='nameremove1 form-control' id='user-name' placeholder='Name..' name='name'/></div>`;
+      var emailinput = `<div class='form-group'><input required type='email' class='emailremove1 form-control' id='email-name' placeholder='Email..' name='email'/></div>`;
+
       $(".fornname").prepend(nameinput);
       $(".fornname").prepend(emailinput);
       $(".signupmodalclick").text("Have an account? Login");
@@ -27,7 +103,7 @@ const NavForHome = (props) => {
         .attr("name", "signupuserconfirm");
       $("#user-usernamename").attr("placeholder", "Create a username..");
       $("#user-password").attr("placeholder", "Create a password..");
-      countloginsignup += 1
+      countloginsignup += 1;
 
     } else {
       $(".nameremove1").remove();
@@ -38,7 +114,8 @@ const NavForHome = (props) => {
       $(".loginmodalLabelchange").text("Login");
       $("#loginuserconfirmidtochange").text("Login");
       $("#loginuserconfirmidtochange").attr("name", "loginuserconfirm");
-      countloginsignup += 1
+      countloginsignup += 1;
+
 
     }
   }
@@ -173,6 +250,9 @@ const NavForHome = (props) => {
                   class="form-control"
                   id="user-usernamename"
                   placeholder="Username.."
+                  value={user.username}
+                  name="username"
+                  onChange={handleInputs}
                   required
                 />
               </div>
@@ -183,6 +263,9 @@ const NavForHome = (props) => {
                   class="form-control"
                   id="user-password"
                   placeholder="Password.."
+                  value={user.password}
+                  name="password"
+                  onChange={handleInputs}
                   required
                 />
               </div>

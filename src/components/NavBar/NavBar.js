@@ -14,9 +14,56 @@ const NavForHome = (props) => {
   });
 
   const [cookies, setCookie] = useCookies(['user']);
-
+  let buttonlogin, buttonloginbig, trophyandquestion, trophyandquestionsmall, logoutsmall;
   var well = {
     boxShadow: "0px 4px 0px 0px #f0f0f0"
+  }
+  if (cookies.jwttokenloginuser) {
+    trophyandquestion = <div class="ml-auto" style={{ display: "flex" }}><div class="d-none d-md-block navbar-nav">
+      <a href="#items-navbar" class="fainbox nav-item nav-link">
+        <i class="fas fa-inbox"></i>
+      </a>
+    </div>
+
+      <div class="d-none d-md-block navbar-nav">
+        <a href="#items-navbar" class="fainbox nav-item nav-link">
+          <i class="fas fa-trophy"></i>
+        </a>
+      </div>
+
+      <div class="d-none d-md-block navbar-nav">
+        <a href="#items-navbar" class="fainbox nav-item nav-link">
+          <i class="fas fa-question-circle"></i>
+        </a>
+      </div>
+    </div>
+    trophyandquestionsmall = <li class="nav-item d-flex mx-auto">
+      <div class="d-block d-md-none">
+        <a href="#navlinksnew" class="fainbox nav-link">
+          <i class="fas fa-inbox"></i>
+        </a>
+      </div>
+
+      <div class="d-block d-md-none">
+        <a href="#navlinksnew" class="fainbox nav-link">
+          <i class="fas fa-trophy"></i>
+        </a>
+      </div>
+
+      <div class="d-block d-md-none">
+        <a href="#navlinksnew" class="fainbox nav-link">
+          <i class="fas fa-question-circle"></i>
+        </a>
+      </div>
+    </li>
+    logoutsmall = <li class="nav-item mx-auto">
+      <a href="#navlinksnew" class="nav-link text-truncate">
+        <i class="fas fa-house"></i><span class="ms-1">Logout</span>
+      </a>
+    </li>
+  } else {
+    buttonlogin = <button type="button" class="d-block d-md-none btn btn-outline-primary" id="loginbuttonfor" data-toggle="modal" data-target="#loginModal">Login</button>
+    buttonloginbig = <button type="button" class="btn btn-outline-primary nav-item " data-toggle="modal" data-target="#loginModal" id="loginbuttonfor">Login</button>
   }
   const submitdataforloginorsignup = () => {
     var chckorloginorsignupvariable = $("#loginuserconfirmidtochange").attr("name");
@@ -39,11 +86,11 @@ const NavForHome = (props) => {
           })
           const resjson = await res.json();
           if (res.status === 201) {
-            console.log(resjson.jwttokenloginuser);
             setCookie('jwttokenloginuser', resjson.jwttokenloginuser, {
               expires: new Date(Date.now() + 60000),
             });
             window.alert(resjson.message);
+            window.location.reload();
           } else {
             window.alert(resjson.error);
           }
@@ -129,14 +176,7 @@ const NavForHome = (props) => {
               <i class="fab fa-stack-overflow"></i>&nbsp;AskOverflow
             </a>
           </div>
-          <button
-            type="button"
-            class="d-block d-md-none btn btn-outline-primary"
-            data-toggle="modal"
-            data-target="#loginModal"
-          >
-            Login
-          </button>
+          {buttonlogin}
           <button
             type="button"
             class="navbar-toggler"
@@ -177,34 +217,11 @@ const NavForHome = (props) => {
               </button>
             </div>
             {/* <div class> */}
-            <div class="d-none d-md-block navbar-nav ml-auto">
-              <a href="#items-navbar" class="fainbox nav-item nav-link">
-                <i class="fas fa-inbox"></i>
-              </a>
-            </div>
-
-            <div class="d-none d-md-block navbar-nav">
-              <a href="#items-navbar" class="fainbox nav-item nav-link">
-                <i class="fas fa-trophy"></i>
-              </a>
-            </div>
-
-            <div class="d-none d-md-block navbar-nav">
-              <a href="#items-navbar" class="fainbox nav-item nav-link">
-                <i class="fas fa-question-circle"></i>
-              </a>
-            </div>
+            {trophyandquestion}
 
             <div class="row ml-auto">
               <div class="col-5  d-flex d-sm-none d-none d-md-block">
-                <button
-                  type="button"
-                  class="btn btn-outline-primary nav-item"
-                  data-toggle="modal"
-                  data-target="#loginModal"
-                >
-                  Login
-                </button>
+                {buttonloginbig}
               </div>
               <div class="col-1">
                 <Profileinlarge1 />
@@ -342,23 +359,7 @@ const NavForHome = (props) => {
                 <i class="fas fa-users"></i><span class="ms-1">Teams</span> </a>
             </li>
             <li class="nav-item d-flex mx-auto">
-              <div class="d-block d-md-none">
-                <a href="#navlinksnew" class="fainbox nav-link">
-                  <i class="fas fa-inbox"></i>
-                </a>
-              </div>
-
-              <div class="d-block d-md-none">
-                <a href="#navlinksnew" class="fainbox nav-link">
-                  <i class="fas fa-trophy"></i>
-                </a>
-              </div>
-
-              <div class="d-block d-md-none">
-                <a href="#navlinksnew" class="fainbox nav-link">
-                  <i class="fas fa-question-circle"></i>
-                </a>
-              </div>
+              {trophyandquestionsmall}
             </li>
             <li class="dropdown mx-auto">
               <a href="#navlinksnew" class="nav-link dropdown-toggle  text-truncate" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -374,11 +375,11 @@ const NavForHome = (props) => {
                     <li><a class="dropdown-item" href="navlinksnew">Sign out</a></li>*/}
               </ul>
             </li>
-            <li class="nav-item mx-auto">
-              <a href="#navlinksnew" class="nav-link text-truncate">
-                <i class="fas fa-house"></i><span class="ms-1">Logout</span>
-              </a>
+            <li class="mx-auto">
+              <Profileinlarge1 />
             </li>
+
+            {logoutsmall}
 
           </ul>
         </div>
@@ -386,5 +387,7 @@ const NavForHome = (props) => {
     </div>
   );
 };
+
+
 
 export { NavForHome };

@@ -57,7 +57,7 @@ const NavForHome = (props) => {
       </div>
     </li>
     logoutsmall = <li class="nav-item mx-auto">
-      <a href="#navlinksnew" class="nav-link text-truncate">
+      <a href="logout" class="nav-link text-truncate">
         <i class="fas fa-house"></i><span class="ms-1">Logout</span>
       </a>
     </li>

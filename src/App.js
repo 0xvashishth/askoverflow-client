@@ -6,6 +6,7 @@ import './App.css';
 import homepage from './components/HomePage/homepage';
 import userprofile from './components/UserProfile/UserProfile';
 import Question from './components/Question/question';
+import logoutuser from './components/logout/logout';
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
           <Route path='/home/' component={homepage} />
           <Route path='/user/' component={userprofile} />
           <Route path='/question/' component={Question} />
+          <Route path="/logout" component={logoutuser} />
         </div>
       </Router>
     );

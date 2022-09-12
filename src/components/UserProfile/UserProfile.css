@@ -317,7 +317,7 @@ nav .profile-details i{
 }
 @media (max-width: 550px) {
   .overview-boxes .box{
-    width: 50%;
+    width: 100%;
     margin-bottom: 15px;
   }
   .overview-boxes .box-topic{

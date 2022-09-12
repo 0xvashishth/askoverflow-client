@@ -5,6 +5,7 @@ import { SideFeatured } from "../SideFeatured/sidefeatured"
 import { Questions } from "../Questions/questions"
 import { AskQuestion } from "../AskQuestion/askquestion"
 import $ from "jquery";
+import { useCookies } from 'react-cookie'
 
 class homepage extends Component {
   constructor(props) {
@@ -49,6 +50,16 @@ class homepage extends Component {
   }
 
   render() {
+    // const [cookies, setCookie] = useCookies(['user']);
+    let cookies = {};
+    // cookies.jwttokenloginuser = "abc";
+    let askquestionsign;
+    if (cookies.jwttokenloginuser) {
+      askquestionsign = <div> <button class="btnaskquestion btn btn-secondary" data-bs-toggle="modal" data-bs-target="#askquestionmodal">Ask Question</button> <AskQuestion /> </div>
+    } else {
+      askquestionsign = <button class="btnaskquestion btn btn-secondary" data-toggle="modal" data-target="#loginModal">Login To Ask Question</button>
+    }
+
     return (
       <div>
         <NavForHome />
@@ -140,8 +151,7 @@ class homepage extends Component {
                       <h3 class="allquesionhead">Top Questions</h3>
                     </div>
                     <div class="col-5 col-xl-3 col-lg-4 col-md-5">
-                      <button class="btnaskquestion btn btn-secondary" data-bs-toggle="modal" data-bs-target="#askquestionmodal">Ask Question</button>
-                      <AskQuestion />
+                      {askquestionsign}
                     </div>
                   </div>
 

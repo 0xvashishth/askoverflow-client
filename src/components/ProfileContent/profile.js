@@ -24,19 +24,19 @@ const Profileinsmall = (props) => {
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
         <li>
-          <button class="dropdown-item" type="button">
+          <a class="dropdown-item" href="user">
             Profile
-          </button>
+          </a>
         </li>
         <li>
-          <button class="dropdown-item" type="button">
+          <a class="dropdown-item" href="questions">
             My Questions
-          </button>
+          </a>
         </li>
         <li>
-          <button class="dropdown-item" type="button">
-            My Answers
-          </button>
+          <a class="dropdown-item" href="logout">
+            Logout
+          </a>
         </li>
       </ul>
     </div>
@@ -67,19 +67,19 @@ const Profileinlarge1 = (props) => {
       </button>
       <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenu2">
         <li>
-          <button class="dropdown-item" type="button">
+          <a class="dropdown-item" href="user">
             Profile
-          </button>
+          </a>
         </li>
         <li>
-          <button class="dropdown-item" type="button">
+          <a class="dropdown-item" href="questions">
             My Questions
-          </button>
+          </a>
         </li>
         <li>
-          <button class="dropdown-item" type="button">
-            My Answers
-          </button>
+          <a class="dropdown-item" href="logout">
+            Logout
+          </a>
         </li>
       </ul>
     </div>

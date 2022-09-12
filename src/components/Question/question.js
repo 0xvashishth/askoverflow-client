@@ -210,7 +210,7 @@ class Question extends Component {
                         <div>
                           <a href="#"><i class="fas fa-chevron-down"></i></a>
                         </div>
-                        <div><i class="fa fa-check"></i></div>
+                        {/* <div><i class="fa fa-check"></i></div> */}
                       </div>
                       <div class="col-10 bg-light text-dark">
                         <div class="row">

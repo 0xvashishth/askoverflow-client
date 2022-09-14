@@ -93,7 +93,7 @@ class Question extends Component {
             {/*second grid*/}
             <div class="col-sm-9 col-md-10 col-12 bgmoredark cssforpadTomaincontent">
               <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-8 col-md-10 col-12">
                   <div class="row margquesions">
                     <div class="col-7 col-xl-9 col-lg-8 col-md-7">
                       <h1 itemprop="name" class="fs-headline1 ow-break-word mb8 flex--item fl1">
@@ -107,7 +107,7 @@ class Question extends Component {
                     </div>
                   </div>
                   <div class="row margquesions">
-                    <div class="col-12">
+                    <div class="col-lg-8 col-12">
                       <span class="fc-light mr2">Asked</span> &nbsp;
                       <span class="fc-dark mr2">5 years, 1 month ago</span> | &nbsp;
                       <span class="fc-light mr2">Modified</span> &nbsp;
@@ -133,17 +133,17 @@ class Question extends Component {
                   </div>
                   <hr />
 
-                  <div class="row margquesions1">
-                    <div class="col-8">
+                  <div class="row justify-content-center margquesions1">
+                    <div class="col-lg-8 col-sm-8 col-12">
                       <h3>{10} Answers:</h3>
                     </div>
 
-                    <div class="col-3 ">
+                    <div class="col-lg-4 col-sm-4 col-12">
                       <div class="row">
-                        <div class="col-6">
+                        <div class="col">
                           sorted by
                         </div>
-                        <div class="col-6">
+                        <div class="col">
                           <select>
                             <option>ascending</option>
                             <option>Most votes</option>

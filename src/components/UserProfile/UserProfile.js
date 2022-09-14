@@ -3,6 +3,7 @@ import "./UserProfile.css";
 import $ from "jquery";
 import fox from "../Questions/fox.jpg";
 import "./script.js"
+import axios from 'axios';
 import Questions from "../Questions/questions"
 import { useCookies } from 'react-cookie';
 import { useHistory } from "react-router-dom";
@@ -10,6 +11,7 @@ import { useHistory } from "react-router-dom";
 const userprofile = () => {
   const [cookies] = useCookies(['user']);
   const [userData = {}, setUserData] = useState();
+  const [questionrData, setQuestionData] = useState();
 
   const history = useHistory();
 
@@ -27,9 +29,8 @@ const userprofile = () => {
         creadentials: "include"
       });
       const userdata = await res.json();
-      console.log(userdata._id);
+
       setUserData(userdata);
-      console.log(userData)
       if (res.status !== 200) {
         const error = new Error(res.error);
         throw error;
@@ -58,7 +59,24 @@ const userprofile = () => {
     var tempPageName = "#" + pageName;
     $(tempPageName).css("display", "block");
     event.currentTarget.className += " active";
+    if (pageName === "user_questions") {
+      axios
+        .get('https://askoverflow-server.vashishth-patel.repl.co/publicquestionsget')
+        .then(res => {
+
+          setQuestionData(res)
+          for (i in questionrData) {
+            console.log("Hello")
+            console.log(i);
+          }
+        })
+        .catch(err => {
+          console.log('Error from server!!');
+        })
+    }
   }
+  var arr = questionrData
+  console.log(typeof (questionrData));
 
   return (
     <div>
@@ -202,7 +220,7 @@ const userprofile = () => {
             <h3>Questions</h3>
             <div class="row container">
               <div class="col-10 container">
-                <Questions />
+                Hello
               </div>
             </div>
 

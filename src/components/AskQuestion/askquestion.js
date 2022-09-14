@@ -1,27 +1,21 @@
 import React from "react";
 import "./askquestion.css";
 import $ from "jquery";
-import { useState } from "react";
 import { useCookies } from 'react-cookie';
 
-// let countloginsignup=0
 
 const AskQuestion = (props) => {
 
-  const [user, setUser] = useState({
-    username: "", password: ""
-  });
 
-  const [cookies, setCookie] = useCookies(['user']);
+  const [cookies] = useCookies(['user']);
 
   const submitaquestion = () => {
-    var chckorloginorsignupvariable = $("#loginuserconfirmidtochange").attr("name");
 
     let questionheader = $("#question-header").val();
     let questiontags = $("#question-tags").val();
     let questionbody = $("#question-body").val();
 
-    if (questionheader == "" || questiontags == "" || questionbody == "") {
+    if (questionheader === "" || questiontags === "" || questionbody === "") {
       window.alert("Some Fields are empty");
     } else {
       var arraytags = questiontags.split(',');
@@ -33,8 +27,10 @@ const AskQuestion = (props) => {
         const res = await fetch("https://askoverflow-server.vashishth-patel.repl.co/questionpost", {
           method: "POST",
           headers: {
+            Accept: "application/json",
             "Content-Type": "application/json"
           },
+          creadentials: "include",
           body: JSON.stringify({
             header: questionheader, tags: arraytags, body: questionbody, jwttokenloginuser: cookies.jwttokenloginuser
           }),

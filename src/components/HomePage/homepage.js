@@ -60,7 +60,7 @@ class homepage extends Component {
     const { jwttokenloginusercookie } = this.state;
 
     let askquestionsign;
-    if (jwttokenloginusercookie != "") {
+    if (jwttokenloginusercookie !== "") {
       askquestionsign = <div> <button class="btnaskquestion btn btn-secondary" data-bs-toggle="modal" data-bs-target="#askquestionmodal">Ask Question</button> <AskQuestion /> </div>
     } else {
       askquestionsign = <button class="btnaskquestion btn btn-secondary" data-toggle="modal" data-target="#loginModal">Login To Ask Question</button>

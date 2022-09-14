@@ -14,7 +14,7 @@ class Questions extends Component {
     };
   }
   componentDidMount() {
-    if (incount == 0) {
+    if (incount === 0) {
       $('.questionclass').append(
         $('<img>').prop({
           src: 'https://user-images.githubusercontent.com/76911582/190166775-b792861c-f01f-4a69-b406-e08a0adf0fd0.gif',

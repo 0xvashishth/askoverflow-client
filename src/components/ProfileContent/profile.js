@@ -45,7 +45,7 @@ const Profileinsmall = (props) => {
 
 const Profileinlarge1 = (props) => {
   // const  book  = props.book;
-  const [cookies, setCookie] = useCookies(['user']);
+  const [cookies] = useCookies(['user']);
   var profile;
   if (cookies.jwttokenloginuser) {
     profile = <div class="dropdown .d-lg-none .d-xl-block">

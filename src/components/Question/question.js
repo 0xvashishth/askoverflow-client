@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import "./question.css";
 import { NavForHome } from "../NavBar/NavBar";
 import { SideFeatured } from "../SideFeatured/sidefeatured"
-import { Questions } from "../Questions/questions"
+// import { Questions } from "../Questions/questions"
 import { AskQuestion } from "../AskQuestion/askquestion"
-import $ from "jquery";
+// import $ from "jquery";
 
 class Question extends Component {
   render() {
@@ -160,11 +160,11 @@ class Question extends Component {
                     <div class="row">
                       <div class="col-1">
                         <div>
-                          <a href="#"><i class="fas fa-chevron-up"></i></a>
+                          <a href="#hello"><i class="fas fa-chevron-up"></i></a>
                         </div>
                         <div>{5}</div>
                         <div>
-                          <a href="#"><i class="fas fa-chevron-down"></i></a>
+                          <a href="#hello"><i class="fas fa-chevron-down"></i></a>
                         </div>
                         <div><i class="fa fa-check"></i></div>
                       </div>
@@ -180,9 +180,9 @@ class Question extends Component {
                         </div>
                         <div class="row">
                           <div class="col-7">
-                            <span class="fc-light mr2"><a href="#">share</a></span> &nbsp;
-                            <span class="fc-light mr2"><a href="#">edit</a></span> &nbsp;
-                            <span class="fc-light mr2"><a href="#">follow</a></span> &nbsp;
+                            <span class="fc-light mr2"><a href="#hello">share</a></span> &nbsp;
+                            <span class="fc-light mr2"><a href="#hello">edit</a></span> &nbsp;
+                            <span class="fc-light mr2"><a href="#hello">follow</a></span> &nbsp;
                           </div>
                           <div class="col-5">
                             <div class="font-weight-light text-secondary">
@@ -190,7 +190,7 @@ class Question extends Component {
                             </div>
                             <div>
                               <div class="user-gravatar32">
-                                <img src="https://graph.facebook.com/100001761656850/picture?type=large" alt="user avatar" width="32" height="32" class="bar-sm" /> &nbsp; <a href="#">d.poriya</a>
+                                <img src="https://graph.facebook.com/100001761656850/picture?type=large" alt="user avatar" width="32" height="32" class="bar-sm" /> &nbsp; <a href="#hello">d.poriya</a>
                               </div>
                             </div>
                           </div>
@@ -204,11 +204,11 @@ class Question extends Component {
                     <div class="row answerm">
                       <div class="col-1">
                         <div>
-                          <a href="#"><i class="fas fa-chevron-up"></i></a>
+                          <a href="#hello"><i class="fas fa-chevron-up"></i></a>
                         </div>
                         <div>{5}</div>
                         <div>
-                          <a href="#"><i class="fas fa-chevron-down"></i></a>
+                          <a href="#hello"><i class="fas fa-chevron-down"></i></a>
                         </div>
                         {/* <div><i class="fa fa-check"></i></div> */}
                       </div>
@@ -224,9 +224,9 @@ class Question extends Component {
                         </div>
                         <div class="row">
                           <div class="col-7">
-                            <span class="fc-light mr2"><a href="#">share</a></span> &nbsp;
-                            <span class="fc-light mr2"><a href="#">edit</a></span> &nbsp;
-                            <span class="fc-light mr2"><a href="#">follow</a></span> &nbsp;
+                            <span class="fc-light mr2"><a href="#hello">share</a></span> &nbsp;
+                            <span class="fc-light mr2"><a href="#hello">edit</a></span> &nbsp;
+                            <span class="fc-light mr2"><a href="#hello">follow</a></span> &nbsp;
                           </div>
                           <div class="col-5">
                             <div class="font-weight-light text-secondary">
@@ -234,7 +234,7 @@ class Question extends Component {
                             </div>
                             <div>
                               <div class="user-gravatar32">
-                                <img src="https://graph.facebook.com/100001761656850/picture?type=large" alt="user avatar" width="32" height="32" class="bar-sm" /> &nbsp; <a href="#">d.poriya</a>
+                                <img src="https://graph.facebook.com/100001761656850/picture?type=large" alt="user avatar" width="32" height="32" class="bar-sm" /> &nbsp; <a href="#hello">d.poriya</a>
                               </div>
                             </div>
                           </div>

@@ -1,14 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './questions.css';
 import TextTruncate from 'react-text-truncate';
-import fox from "./fox.jpg";
 
 const QuestionCard = (props) => {
   const questionsresponse = props.question;
-
+  const userdataname = questionsresponse.username;
+  var avatarlink = "https://avatars.dicebear.com/api/gridy/" + userdataname + ".svg"
   return (
-    <div>
+    <>
       <div class="row">
         <div class="col-md-2 commenttagview">
           <div class="paracomment float-center">2 comments</div>
@@ -35,7 +34,7 @@ const QuestionCard = (props) => {
                     width="20"
                     height="20"
                     alt="focximg"
-                    class="" style={{ borderRadius: "10px" }} src={fox} />&nbsp;
+                    class="" style={{ borderRadius: "10px" }} src={avatarlink} />&nbsp;
                   <a class="avatarusername" href="#avatarlink" style={{ textDecoration: "none" }}><span class="avatarname">{questionsresponse.author}</span></a>&nbsp;<div class="daysagocss">
                     asked 14 days ago
                   </div>
@@ -46,7 +45,7 @@ const QuestionCard = (props) => {
         </div>
       </div>
       <hr />
-    </div>
+    </>
 
   )
 };

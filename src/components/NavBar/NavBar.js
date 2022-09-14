@@ -67,8 +67,8 @@ const NavForHome = (props) => {
   }
   const submitdataforloginorsignup = () => {
     var chckorloginorsignupvariable = $("#loginuserconfirmidtochange").attr("name");
-    if (chckorloginorsignupvariable == "loginuserconfirm") {
-      if (user.username == "" || user.password == "") {
+    if (chckorloginorsignupvariable === "loginuserconfirm") {
+      if (user.username === "" || user.password === "") {
         console.log("not eligible for login");
       } else {
         let usernameget = user.username;
@@ -98,13 +98,13 @@ const NavForHome = (props) => {
         postLoginData();
       }
 
-    } else if (chckorloginorsignupvariable == "signupuserconfirm") {
+    } else if (chckorloginorsignupvariable === "signupuserconfirm") {
       let namesign = $(".nameremove1").val();
       let emailsign = $(".emailremove1").val();
       let usernamesign = $("#user-usernamename").val();
       let passwordsign = $("#user-password").val();
 
-      if (!namesign || !emailsign || !usernamesign || !passwordsign || namesign == "" || emailsign == "" || usernamesign == "" || passwordsign == "") {
+      if (!namesign || !emailsign || !usernamesign || !passwordsign || namesign === "" || emailsign === "" || usernamesign === "" || passwordsign === "") {
         console.log("not eligible for signup");
       } else {
         const postSignData = async () => {

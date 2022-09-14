@@ -1,37 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./UserProfile.css";
 import $ from "jquery";
 import fox from "../Questions/fox.jpg";
 import "./script.js"
 import Questions from "../Questions/questions"
+import { useCookies } from 'react-cookie';
 import { useHistory } from "react-router-dom";
 
-// class userprofile extends Component {
 const userprofile = () => {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     questions: [],
-  //   };
-  // }
-
-  // render() {
+  const [cookies] = useCookies(['user']);
+  const [userData = {}, setUserData] = useState();
 
   const history = useHistory();
 
   const callUserPage = async () => {
     try {
       const res = await fetch('https://askoverflow-server.vashishth-patel.repl.co/user', {
-        method: "GET",
+        method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
+        body: JSON.stringify({
+          jwttokenloginuser: cookies.jwttokenloginuser
+        }),
         creadentials: "include"
       });
-      const data = await res.json();
-      console.log(data);
-      if (res.status === 200) {
+      const userdata = await res.json();
+      console.log(userdata._id);
+      setUserData(userdata);
+      console.log(userData)
+      if (res.status !== 200) {
         const error = new Error(res.error);
         throw error;
       }
@@ -131,7 +130,7 @@ const userprofile = () => {
           </div>
           <div class="profile-details">
             <img src={fox} alt="" />
-            <span class="admin_name">Prem Shahi</span>
+            <span class="admin_name">{userData.name}</span>
           </div>
         </nav>
 
@@ -241,7 +240,16 @@ const userprofile = () => {
 
 
         <div class="home-content Right-bar" id="user_settings" style={{ display: "none" }}>
-          <h1>Hello Settings</h1>
+          <div className="container d-flex">
+            <div className='row'>
+              <div className="d-flex">
+                <h4>Username:&nbsp; </h4> <h4> {userData.username}</h4>
+              </div>
+              <div className="d-flex">
+                <h4>Email:&nbsp; </h4> <h4 className="danger"> {userData.email}</h4>
+              </div>
+            </div>
+          </div>
         </div>
 
 

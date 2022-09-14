@@ -27,7 +27,6 @@ class Questions extends Component {
     axios
       .get('https://askoverflow-server.vashishth-patel.repl.co/publicquestionsget')
       .then(res => {
-        console.log("Hello World response");
         this.setState({
           questions: res.data
         })

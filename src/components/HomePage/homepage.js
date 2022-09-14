@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./homepage.css";
 import { NavForHome } from "../NavBar/NavBar";
 import { SideFeatured } from "../SideFeatured/sidefeatured"
-import { Questions } from "../Questions/questions"
+import Questions from "../Questions/questions"
 import { AskQuestion } from "../AskQuestion/askquestion"
 import $ from "jquery";
 import { instanceOf } from 'prop-types';

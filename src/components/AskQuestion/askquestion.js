@@ -13,45 +13,45 @@ const AskQuestion = (props) => {
   });
 
   const [cookies, setCookie] = useCookies(['user']);
-  
+
   const submitaquestion = () => {
     var chckorloginorsignupvariable = $("#loginuserconfirmidtochange").attr("name");
-    
+
     let questionheader = $("#question-header").val();
     let questiontags = $("#question-tags").val();
     let questionbody = $("#question-body").val();
-    
-      if (questionheader == "" || questiontags == "" || questionbody=="") {
-        window.alert("Some Fields are empty");
-      } else {
-          var arraytags = questiontags.split(',');
-          console.log(arraytags)
-          console.log(questionheader)
-          console.log(questionbody)
-        const postQuestionData = async () => {
-          // e.preventDefault();
-          const res = await fetch("https://askoverflow-server.vashishth-patel.repl.co/questionpost", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              header: questionheader, tags: arraytags, body: questionbody, jwttokenloginuser: cookies.jwttokenloginuser
-            }),
-          })
-          const resjson = await res.json();
-          if (res.status === 201) {
-            // setCookie('jwttokenloginuser', resjson.jwttokenloginuser, {
-            //   expires: new Date(Date.now() + 600000),
-            // });
-            window.alert(resjson.message);
-            window.location.reload();
-          } else {
-            window.alert(resjson.error);
-          }
+
+    if (questionheader == "" || questiontags == "" || questionbody == "") {
+      window.alert("Some Fields are empty");
+    } else {
+      var arraytags = questiontags.split(',');
+      console.log(arraytags)
+      console.log(questionheader)
+      console.log(questionbody)
+      const postQuestionData = async () => {
+        // e.preventDefault();
+        const res = await fetch("https://askoverflow-server.vashishth-patel.repl.co/questionpost", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            header: questionheader, tags: arraytags, body: questionbody, jwttokenloginuser: cookies.jwttokenloginuser
+          }),
+        })
+        const resjson = await res.json();
+        if (res.status === 201) {
+          // setCookie('jwttokenloginuser', resjson.jwttokenloginuser, {
+          //   expires: new Date(Date.now() + 600000),
+          // });
+          window.alert(resjson.message);
+          window.location.reload();
+        } else {
+          window.alert(resjson.error);
         }
-        postQuestionData();
       }
+      postQuestionData();
+    }
   }
 
 

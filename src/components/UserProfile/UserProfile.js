@@ -3,7 +3,7 @@ import "./UserProfile.css";
 import $ from "jquery";
 import fox from "../Questions/fox.jpg";
 import "./script.js"
-import { Questions } from "../Questions/questions"
+import Questions from "../Questions/questions"
 
 class userprofile extends Component {
   constructor(props) {

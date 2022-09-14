@@ -1,100 +1,64 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './questions.css';
-import fox from "./fox.jpg";
-import TextTruncate from 'react-text-truncate';
+import axios from 'axios';
+import QuestionCard from './QuestionCard';
 import $ from "jquery";
 
-const Questions = (props) => {
+var incount = 0;
 
-  var [questions, setQuestions] = useState([]);
-
-  // const  book  = props.book;
-  var ipuser="initial", questionsresponse;
-  var repeatQuestions = [];
-  // $.getJSON("https://api.ipify.org?format=json", function(data) {
-  //   ipuser = data.ip;
-  // });
-
-  // const postQuestionData = async () => {
-  //   // e.preventDefault();
-  //   const res = await fetch("https://askoverflow-server.vashishth-patel.repl.co/publicquestionsget", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     // body: JSON.stringify({
-  //     //   // nothing to pass as of now
-  //     //   ip: "hello"
-  //     // }),
-  //   })
-  //   questionsresponse = await res.json();
-  //   console.log(questionsresponse[0]);
-  //   count = questionsresponse.length;
-  //   // if (res.status === 201) {
-  //   //     questionsresponse
-  //   // } else {
-  //   //   window.alert(questionsresponse.error);
-  //   // }
-  // }
-  // postQuestionData();
-
-  // console.log(count);
-  
-  fetch('https://askoverflow-server.vashishth-patel.repl.co/publicquestionsget')
-  .then(questionsresponse => questionsresponse.json())
-  .then(questionsresponse =>{
-    // console.log(questionsresponse.length)
-    for (var i = 0; i < questionsresponse.length; i++) {
-    // console.log(questionsresponse[i])
-    repeatQuestions[i] = <div>
-      <div class="row">
-        <div class="col-md-2 commenttagview">
-          <div class="paracomment float-center">2 comments</div>
-          <div class="paracommentbadge float-center badge badge-success">4 answers</div>
-          <div class="paracomment float-center">{questionsresponse[i].tags.length}</div>
-          <div class="paracomment float-center">36 views</div>
-        </div>
-
-        <div class="col-md-10">
-          <div class="row">
-            <div class="row">
-              <a href="#header" class="header-question text-primary" style={{ textDecoration: "none" }}><TextTruncate line={2} text={questionsresponse[i].body} /></a>
-            </div>
-            <div class="row">
-              <div class="col-8">
-                <a href="#badge" class="badge badge-pad">{questionsresponse[i].tags[0]}</a>&nbsp;
-                <a href="#badge" class="badge badge-pad">{questionsresponse[i].tags[1]}</a>&nbsp;
-                <a href="#badge" class="badge badge-pad">{questionsresponse[i].tags[2]}</a>&nbsp;
-              </div>
-              <div class="col-4">
-                <div class="d-flex">
-                  <img
-                    width="20"
-                    height="20"
-                    alt="focximg"
-                    class="" style={{ borderRadius: "10px" }} src={fox} />&nbsp;
-                  <a class="avatarusername" href="#avatarlink" style={{ textDecoration: "none" }}><span class="avatarname">{questionsresponse[i].author}</span></a>&nbsp;<div class="daysagocss">
-                    asked 14 days ago
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr />
-    </div>
-
+class Questions extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      questions: []
+    };
   }
-  })
+  componentDidMount() {
+    if (incount == 0) {
+      $('.questionclass').append(
+        $('<img>').prop({
+          src: 'https://user-images.githubusercontent.com/76911582/190166775-b792861c-f01f-4a69-b406-e08a0adf0fd0.gif',
+          className: 'toremovegif',
+        }).css({ "position": "relative", "height": "200px", "margine-left": "280px" })
+      );
+    }
+    incount++;
 
-  console.log(repeatQuestions);
-  // for(var i=0;i<10000000000;i++){
-    
-  // }
-  repeatQuestions[3] = <div>Hello Developer</div>
-  // console.log(repeatQuestions[0])
-  return (repeatQuestions)
-};
+    axios
+      .get('https://askoverflow-server.vashishth-patel.repl.co/publicquestionsget')
+      .then(res => {
+        console.log("Hello World response");
+        this.setState({
+          questions: res.data
+        })
+      })
+      .catch(err => {
+        console.log('Error from server!!');
+      })
+  };
 
-export { Questions };
+
+  render() {
+
+    // var imgloader = <img src="https://user-images.githubusercontent.com/76911582/190159611-d2622427-1058-4cc2-bf75-4b56f2be65b2.gif" />
+    // var changeloader = document.getElementsByClassName("questionclass");
+
+
+    const questions = this.state.questions;
+    let questionList = [];
+
+    if (!questions) {
+      questionList = "No questions are found!";
+    } else {
+      questionList = questions.map((questions, k) =>
+        <QuestionCard question={questions} key={k} />
+      );
+      $(".toremovegif").remove();
+    }
+    return (
+      <div className="questionclass">{questionList}</div>
+    );
+  }
+}
+
+export default Questions;

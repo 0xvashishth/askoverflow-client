@@ -95,16 +95,20 @@ class Question extends Component {
               <div class="row">
                 <div class="col-lg-8 col-md-10 col-12">
                   <div class="row margquesions">
-                    <div class="col-7 col-xl-9 col-lg-8 col-md-7">
+                    <div class="col-12">
+                      <button class="float-right
+ btnaskquestion btn btn-secondary" data-bs-toggle="modal" data-bs-target="#askquestionmodal">Ask Question</button>
+                      <AskQuestion />
+                    </div>
+                  </div>
+                  <div class="row margquesions">
+                    <div class="col-12">
                       <h1 itemprop="name" class="fs-headline1 ow-break-word mb8 flex--item fl1">
                         <a href="/questions/45089386/what-is-the-best-way-to-redirect-a-page-using-react-router" class="question-hyperlink">What is the best way to redirect a page using React Router? [closed]
                         </a>
                       </h1>
                     </div>
-                    <div class="col-5 col-xl-3 col-lg-4 col-md-5">
-                      <button class="btnaskquestion btn btn-secondary" data-bs-toggle="modal" data-bs-target="#askquestionmodal">Ask Question</button>
-                      <AskQuestion />
-                    </div>
+
                   </div>
                   <div class="row margquesions">
                     <div class="col-lg-8 col-12">
@@ -119,17 +123,33 @@ class Question extends Component {
                   <hr />
 
                   <div class="row margquesions1">
-                    <div class="col-1"></div>
-                    <div class="col-10">
-                      <p>Extra Content</p>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 
-                        Why do we use it?
-                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                    <div class="row">
+                      <div class="col-10 offset-1">
+                        <p>Extra Content</p>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 
-                      </p>
+                          Why do we use it?
+                          It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+                        </p>
+                      </div>
                     </div>
-                    <div class="col-1"></div>
+                    <div>
+                      <div class="question-div offset-1">
+                        <a href="#hhh"><span class="badge question-tags">python</span></a>
+                      </div>
+                      <div class="question-div">
+                        <a href="#hhh"><span class="badge question-tags">django</span></a>
+                      </div>
+                      <div class="question-div">
+                        <a href="#hhh"><span class="badge question-tags">mvc</span></a>
+                      </div>
+                      <div class="question-div">
+                        <a href="#hhh"><span class="badge question-tags">java</span></a>
+                      </div>
+                    </div>
+
                   </div>
                   <hr />
 
@@ -140,10 +160,10 @@ class Question extends Component {
 
                     <div class="col-lg-4 col-sm-4 col-12">
                       <div class="row">
-                        <div class="col">
+                        <div class="col-lg-4 col">
                           sorted by
                         </div>
-                        <div class="col">
+                        <div class="col-lg-2 col">
                           <select>
                             <option>ascending</option>
                             <option>Most votes</option>
@@ -171,7 +191,7 @@ class Question extends Component {
                       <div class="col-10 bg-light text-dark">
                         <div class="row">
 
-                          <div class="col-10">
+                          <div class="col-12">
                             <p>
                               Why do we use it?
                               It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
@@ -179,12 +199,12 @@ class Question extends Component {
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-7">
+                          <div class="col-8">
                             <span class="fc-light mr2"><a href="#hello">share</a></span> &nbsp;
                             <span class="fc-light mr2"><a href="#hello">edit</a></span> &nbsp;
                             <span class="fc-light mr2"><a href="#hello">follow</a></span> &nbsp;
                           </div>
-                          <div class="col-5">
+                          <div class="col-4">
                             <div class="font-weight-light text-secondary">
                               answered <span title="2019-03-03 16:34:02Z" class="relativetime">Mar 3, 2019 at 16:34</span>
                             </div>
@@ -215,7 +235,7 @@ class Question extends Component {
                       <div class="col-10 bg-light text-dark">
                         <div class="row">
 
-                          <div class="col-10">
+                          <div class="col-12">
                             <p>
                               Why do we use it?
                               It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
@@ -223,12 +243,12 @@ class Question extends Component {
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-7">
+                          <div class="col-8">
                             <span class="fc-light mr2"><a href="#hello">share</a></span> &nbsp;
                             <span class="fc-light mr2"><a href="#hello">edit</a></span> &nbsp;
                             <span class="fc-light mr2"><a href="#hello">follow</a></span> &nbsp;
                           </div>
-                          <div class="col-5">
+                          <div class="col-4">
                             <div class="font-weight-light text-secondary">
                               answered <span title="2019-03-03 16:34:02Z" class="relativetime">Mar 3, 2019 at 16:34</span>
                             </div>

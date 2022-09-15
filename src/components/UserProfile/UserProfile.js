@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./UserProfile.css";
 import $ from "jquery";
-import fox from "../Questions/fox.jpg";
 import "./script.js"
-import axios from 'axios';
-import Questions from "../Questions/questions"
 import { useCookies } from 'react-cookie';
 import { useHistory } from "react-router-dom";
 
 const userprofile = () => {
   const [cookies] = useCookies(['user']);
+  var loader = <img alt="loader" src="https://user-images.githubusercontent.com/76911582/190166775-b792861c-f01f-4a69-b406-e08a0adf0fd0.gif" style={{ height: "200px" }} />
+  var [questionData, setQuestionData] = useState(loader);
   const [userData = {}, setUserData] = useState();
-  const [questionrData, setQuestionData] = useState();
-
   const history = useHistory();
 
   const callUserPage = async () => {
@@ -29,6 +26,10 @@ const userprofile = () => {
         creadentials: "include"
       });
       const userdata = await res.json();
+
+      const userdataname = userdata.username;
+      console.log(userdataname);
+      userdata.avatarlink = "https://avatars.dicebear.com/api/gridy/" + userdataname + ".svg"
 
       setUserData(userdata);
       if (res.status !== 200) {
@@ -60,23 +61,36 @@ const userprofile = () => {
     $(tempPageName).css("display", "block");
     event.currentTarget.className += " active";
     if (pageName === "user_questions") {
-      axios
-        .get('https://askoverflow-server.vashishth-patel.repl.co/publicquestionsget')
-        .then(res => {
-
-          setQuestionData(res)
-          for (i in questionrData) {
-            console.log("Hello")
-            console.log(i);
+      const postLoginData = async () => {
+        try {
+          const res = await fetch('https://askoverflow-server.vashishth-patel.repl.co/publicquestionsget', {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              jwttokenloginuser: cookies.jwttokenloginuser
+            }),
+            creadentials: "include"
+          });
+          const userdata = await res.json();
+          console.log(userdata);
+          console.log(questionData);
+          let arrayquestion = []
+          for (i in userdata) {
+            arrayquestion[i] = <tr class="row"><td className="col-10">{userdata[i].header}</td><td className="col-2"><a href="#link">Link</a></td><hr /></tr>
           }
-        })
-        .catch(err => {
-          console.log('Error from server!!');
-        })
+          setQuestionData(arrayquestion);
+
+        } catch (err) {
+          console.log(err);
+          history.push('/');
+        }
+      }
+      postLoginData();
     }
   }
-  var arr = questionrData
-  console.log(typeof (questionrData));
 
   return (
     <div>
@@ -147,7 +161,7 @@ const userprofile = () => {
             <i class="fas fa-search"></i>
           </div>
           <div class="profile-details">
-            <img src={fox} alt="" />
+            <img src={userData.avatarlink} alt="#img" />
             <span class="admin_name">{userData.name}</span>
           </div>
         </nav>
@@ -217,11 +231,14 @@ const userprofile = () => {
 
         <div class="home-content Right-bar" id="user_questions" style={{ display: "none" }}>
           <div class="container">
-            <h3>Questions</h3>
+            <h3>My Questions</h3>
+            <br></br>
             <div class="row container">
-              <div class="col-10 container">
-                Hello
-              </div>
+              <table class="table">
+                <tbody class="float-left">
+                  {questionData}
+                </tbody>
+              </table>
             </div>
 
           </div>

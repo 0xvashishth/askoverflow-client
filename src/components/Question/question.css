@@ -16,6 +16,16 @@
   list-style-type: none;
 }
 
+.question-div{
+  display:inline-block;
+  margin-right:8px;
+}
+
+.question-tags{
+  background-color:#e1ebf7;
+  color:#1a91eb;
+}
+
 #header-strip ul {
   display: flex;
   margin: 0;

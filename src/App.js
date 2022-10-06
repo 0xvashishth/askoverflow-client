@@ -10,14 +10,15 @@ import logoutuser from './components/logout/logout';
 
 class App extends Component {
   render() {
+    console.log("Render component first!!");
     return (
       <Router>
         <div>
           <Route exact path='/' component={homepage} />
           <Route path='/home/' component={homepage} />
           <Route path='/user/' component={userprofile} />
-          <Route path='/question/' component={Question} />
-          <Route path="/logout" component={logoutuser} />
+          <Route path='/question/:question_id' component={Question} />
+          <Route path="/logout/" component={logoutuser} />
         </div>
       </Router>
     );

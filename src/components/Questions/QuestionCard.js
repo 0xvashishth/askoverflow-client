@@ -5,6 +5,7 @@ import TextTruncate from 'react-text-truncate';
 const QuestionCard = (props) => {
   const questionsresponse = props.question;
   const userdataname = questionsresponse.username;
+  // console.log(questionsresponse.id);
   var avatarlink = "https://avatars.dicebear.com/api/gridy/" + userdataname + ".svg"
   return (
     <>
@@ -19,7 +20,10 @@ const QuestionCard = (props) => {
         <div class="col-md-10">
           <div class="row">
             <div class="row">
-              <a href="#header" class="header-question text-primary" style={{ textDecoration: "none" }}><TextTruncate line={2} text={questionsresponse.body} /></a>
+              <a href={`/question/${questionsresponse.id}`} class="header-question text-primary" style={{ textDecoration: "none" }}><TextTruncate line={2} text={questionsresponse.header} /></a>
+              <div className="header-question">
+                <TextTruncate line={3} text={questionsresponse.body} className="bodytruncate" />
+              </div>
             </div>
             <div class="row">
               <div class="col-8">

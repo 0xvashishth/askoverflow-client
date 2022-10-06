@@ -87,8 +87,9 @@ const NavForHome = (props) => {
           const resjson = await res.json();
           if (res.status === 201) {
             setCookie('jwttokenloginuser', resjson.jwttokenloginuser, {
-              expires: new Date(Date.now() + 6000000),
+              expires: new Date(Date.now() + 60000000),
             });
+            console.log(resjson.jwttokenloginuser);
             window.alert(resjson.message);
             window.location.reload();
           } else {
@@ -121,6 +122,7 @@ const NavForHome = (props) => {
           const resjson = await res.json();
           if (res.status === 201) {
             window.alert(resjson.message);
+            window.location.reload();
           } else {
             window.alert(resjson.error);
           }

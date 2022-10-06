@@ -10,6 +10,7 @@ const userprofile = () => {
   var loader = <img alt="loader" src="https://user-images.githubusercontent.com/76911582/190166775-b792861c-f01f-4a69-b406-e08a0adf0fd0.gif" style={{ height: "200px" }} />
   var [questionData, setQuestionData] = useState(loader);
   const [userData = {}, setUserData] = useState();
+  const [questioncount, setQuestionCount] = useState();
   const history = useHistory();
 
   const callUserPage = async () => {
@@ -27,11 +28,13 @@ const userprofile = () => {
       });
       const userdata = await res.json();
 
-      const userdataname = userdata.username;
+      const userdataname = userdata.rootUser.username;
       console.log(userdataname);
-      userdata.avatarlink = "https://avatars.dicebear.com/api/gridy/" + userdataname + ".svg"
+      userdata.rootUser.avatarlink = "https://avatars.dicebear.com/api/gridy/" + userdataname + ".svg"
 
-      setUserData(userdata);
+      setUserData(userdata.rootUser);
+      setQuestionCount(userdata.allquestions);
+      console.log(userdata.allquestions);
       if (res.status !== 200) {
         const error = new Error(res.error);
         throw error;
@@ -75,11 +78,11 @@ const userprofile = () => {
             creadentials: "include"
           });
           const userdata = await res.json();
-          console.log(userdata);
-          console.log(questionData);
+          // console.log(userdata);
+          // console.log(questionData);
           let arrayquestion = []
           for (i in userdata) {
-            arrayquestion[i] = <tr class="row"><td className="col-10">{userdata[i].header}</td><td className="col-2"><a href="#link">Link</a></td><hr /></tr>
+            arrayquestion[i] = <tr class="row"><td className="col-10"><a href={`/question/${userdata[i].id}`}>{userdata[i].header}</a></td><td className="col-2"></td><hr /></tr>
           }
           setQuestionData(arrayquestion);
 
@@ -189,7 +192,7 @@ const userprofile = () => {
             <div class="box">
               <div class="right-side">
                 <div class="box-topic">Questions</div>
-                <div class="number">12</div>
+                <div class="number">{questioncount}</div>
                 <div class="indicator">
                 </div>
               </div>

@@ -9,6 +9,16 @@
 
 }
 
+.bodytruncate{
+  color: #7f7a7a;
+  font-size: 10px;
+/*   padding-left: 10px; */
+}
+/* 
+.marginebodytruncxate{
+  padding-left: 10px;
+} */
+
 .badge-pad{
   padding-top: 4px;
   font-size: 10px;

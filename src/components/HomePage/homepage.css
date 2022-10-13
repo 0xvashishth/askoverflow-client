@@ -7,7 +7,12 @@
 }
 
 /* for left menu  */
-
+.col-md-105{
+  width:85.5px;
+}
+.col-md-25{
+  width: 202.5px;
+}
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;

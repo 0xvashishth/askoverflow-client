@@ -146,7 +146,7 @@ const userprofile = () => {
             </a>
           </li>
           <li>
-            <a href="#sidenav-links">
+            <a href="/logout">
               <i class="fas fa-arrow-alt-circle-left"></i>
               <span class="links_name">Log out</span>
             </a>

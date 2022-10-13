@@ -16,13 +16,6 @@ const AnswerPost = (props) => {
   const [cookies] = useCookies(['user']);
   const { question_id } = useParams();
   const jwttoken = cookies.jwttokenloginuser || "";
-  var buttonforanswer = <button onClick={PostAnswerServer} class="btn btn-primary col-12" >{answerload}</button>
-
-  if (jwttoken !== "") {
-    buttonforanswer = <button onClick={PostAnswerServer} class="btn btn-primary col-12" >{answerload}</button>
-  } else {
-    buttonforanswer = <button class="float-right btnaskquestion btn btn-secondary" data-toggle="modal" data-target="#loginModal">Login To Ask Question</button>
-  }
 
   const PostAnswerServer = function() {
     var textanswertopostvalue = $('.textanswertopost').val();
@@ -42,6 +35,16 @@ const AnswerPost = (props) => {
       console.log("no text available");
     }
   }
+
+  var buttonforanswer = <button onClick={PostAnswerServer} class="btn btn-primary col-12" >{answerload}</button>
+
+  if (jwttoken !== "") {
+    buttonforanswer = <button onClick={PostAnswerServer} class="btn btn-primary col-12" >{answerload}</button>
+  } else {
+    buttonforanswer = <button class="float-right btnaskquestion btn btn-secondary" data-toggle="modal" data-target="#loginModal">Login To Ask Question</button>
+  }
+
+
   return (
     <>
       <div class="bottom-margin">

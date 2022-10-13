@@ -87,6 +87,7 @@ const NavForHome = (props) => {
           const resjson = await res.json();
           if (res.status === 201) {
             setCookie('jwttokenloginuser', resjson.jwttokenloginuser, {
+              path: "/",
               expires: new Date(Date.now() + 60000000),
             });
             console.log(resjson.jwttokenloginuser);

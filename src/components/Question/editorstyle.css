@@ -1,0 +1,53 @@
+body {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+.App {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+}
+.wrapper {
+  width: 45%;
+  height: 60%;
+  margin: 25px;
+  outline: none;
+  display: flex;
+  padding: 20px;
+  background: #eceeee;
+  flex-direction: column;
+  border: 2px solid #ccc;
+  overflow: hidden;
+  overflow-y: auto;
+}
+.head {
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+textarea {
+  padding: 15px;
+  border: none;
+  outline: none !important;
+  width: 96%;
+  height: 100%;
+  overflow-x: hidden;
+  font-size: 17px;
+  resize: none;
+  background: #eceeee;
+}
+.markdown {
+  padding: 15px;
+  border: none;
+  outline: none !important;
+  width: 96%;
+  height: 100%;
+  resize: none;
+  overflow-x: hidden;
+  background: #fff;
+}

@@ -77,7 +77,7 @@ const Profileinlarge1 = (props) => {
           </a>
         </li>
         <li>
-          <a class="dropdown-item" href="logout">
+          <a class="dropdown-item" href="/logout">
             Logout
           </a>
         </li>

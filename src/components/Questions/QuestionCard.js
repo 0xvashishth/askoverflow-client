@@ -11,10 +11,10 @@ const QuestionCard = (props) => {
     <>
       <div class="row">
         <div class="col-md-2 commenttagview">
-          <div class="paracomment float-center">2 comments</div>
-          <div class="paracommentbadge float-center badge badge-success">4 answers</div>
+          <div class="paracomment float-center">{questionsresponse.answer_count} comments</div>
+          <div class="paracommentbadge float-center badge badge-success">{questionsresponse.answer_count} answers</div>
           <div class="paracomment float-center">{questionsresponse.tags.length} Tags</div>
-          <div class="paracomment float-center">36 views</div>
+          <div class="paracomment float-center">{questionsresponse.views} views</div>
         </div>
 
         <div class="col-md-10">
@@ -40,7 +40,7 @@ const QuestionCard = (props) => {
                     alt="focximg"
                     class="" style={{ borderRadius: "10px" }} src={avatarlink} />&nbsp;
                   <a class="avatarusername" href="#avatarlink" style={{ textDecoration: "none" }}><span class="avatarname">{questionsresponse.author}</span></a>&nbsp;<div class="daysagocss">
-                    asked 14 days ago
+                    asked {questionsresponse.posted_on}
                   </div>
                 </div>
               </div>

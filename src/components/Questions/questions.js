@@ -10,7 +10,7 @@ class Questions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions: []
+      questions: [],
     };
   }
   componentDidMount() {
@@ -24,15 +24,19 @@ class Questions extends Component {
     }
     incount++;
 
+
+
     axios
       .get('https://askoverflow-server.vashishth-patel.repl.co/publicquestionsget')
       .then(res => {
         this.setState({
           questions: res.data
         })
+        var total = res.data.length;
+        this.props.onhandleCountChange(total, res.data[total - 1].counttags);
       })
       .catch(err => {
-        console.log('Error from server!!');
+        console.log(err);
       })
   };
 
@@ -41,7 +45,6 @@ class Questions extends Component {
 
     // var imgloader = <img src="https://user-images.githubusercontent.com/76911582/190159611-d2622427-1058-4cc2-bf75-4b56f2be65b2.gif" />
     // var changeloader = document.getElementsByClassName("questionclass");
-
 
     const questions = this.state.questions;
     let questionList = [];

@@ -14,6 +14,16 @@ class homepage extends Component {
     cookies: instanceOf(Cookies).isRequired
   };
 
+  state = {
+    total_question: 0,
+    total_tags: 0
+  }
+
+  handleCountChange = (data,  tagscount) => {
+    this.setState({ total_question: data  ,total_tags: tagscount  })     
+    console.log(data, tagscount);
+  }
+
   constructor(props) {
     super(props);
 
@@ -23,42 +33,8 @@ class homepage extends Component {
     };
   }
 
-  // jquerychangecss = () => {
-  //   $(".clickleftmenu").click(function() {
-  //     $(".clickleftmenu")
-  //       .css("color", "black")
-  //       .css("border", "none")
-  //       .css("background", "none");
-  //   });
-  //   $(".clickleftmenu").on("click", function() {
-  //     var takenid = this.id;
-  //     var str = `#${takenid}`;
-  //     $(str)
-  //       .css("color", "#007bff")
-  //       .css("border-right", "5px solid #007bff")
-  //       .css("background", "")
-  //       .removeClass("bg-light")
-  //       .addClass("bg-sec");
-  //   });
-  // };
-
-  // initialcss = () => {
-  //   $("document").ready(function() {
-  //     $("#clickleftmenu1")
-  //       .css("color", "#007bff")
-  //       .css("border-right", "5px solid #007bff")
-  //       .removeClass("bg-light")
-  //       .addClass("bg-sec");
-  //   });
-  // };
-
-  componentDidMount() {
-    // this.jquerychangecss();
-    // this.initialcss();
-  }
-
   render() {
-    const { jwttokenloginusercookie } = this.state;
+    const { jwttokenloginusercookie, total_question  ,total_tags} = this.state;
 
     let askquestionsign;
     if (jwttokenloginusercookie !== "") {
@@ -74,7 +50,7 @@ class homepage extends Component {
         <div class="maincontent">
           <div class="row">
             {/*first grid*/}
-            <Sidebar />
+            <Sidebar questioncount={this.state.total_question}  tagscount={this.state.total_tags}/>
             {/*second grid*/}
             <div class="col-sm-9 col-md-10 col-12 bgmoredark cssforpadTomaincontent">
               <div class="row">
@@ -90,7 +66,7 @@ class homepage extends Component {
 
                   <div class="row margquesions1">
                     <div class="col-lg-4 col-xl-6 col-md-3">
-                      <h4 class="countallquesion">38 Questions</h4>
+                      <h4 class="countallquesion">{total_question} Questions</h4>
                     </div>
                     <div class="col-lg-5 col-xl-5 col-md-6">
                       <div class="row">
@@ -106,7 +82,7 @@ class homepage extends Component {
                   <hr />
 
 
-                  <Questions />
+                  <Questions onhandleCountChange={this.handleCountChange} />
 
                   <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">

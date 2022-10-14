@@ -1,12 +1,13 @@
-import React, { Component,useState } from "react";
+import React, { Component, useState } from "react";
 import ReactMarkdown from 'react-markdown'
 // import React, { useState } from 'react'
 
 import "./question.css";
 
 const Answer = (props) => {
-  const {key,answer} = props;
+  const { key, answer } = props;
   const [markdownInput, setMarkdownInput] = useState()
+  const profile_url = "https://avatars.dicebear.com/api/gridy/" + answer.answered + ".svg";
   return (
     <>
       <div class="row">
@@ -24,7 +25,7 @@ const Answer = (props) => {
           <div class="row">
 
             <div class="col-12">
-              <ReactMarkdown children={answer.answer_body}/>
+              <ReactMarkdown children={answer.answer_body} />
             </div>
           </div>
           <div class="row">
@@ -35,11 +36,11 @@ const Answer = (props) => {
             </div>
             <div class="col-4">
               <div class="font-weight-light text-secondary">
-                answered <span title="2019-03-03 16:34:02Z" class="relativetime">Mar 3, 2019 at 16:34</span>
+                <span title="2019-03-03 16:34:02Z" class="relativetime">{answer.answered_on}</span>
               </div>
               <div>
                 <div class="user-gravatar32">
-                  <img src="https://graph.facebook.com/100001761656850/picture?type=large" alt="user avatar" width="32" height="32" class="bar-sm" /> &nbsp; <a href="#hello">{answer.answered_by}</a>
+                  <img src={profile_url} alt="user avatar" width="32" height="32" class="bar-sm" /> &nbsp; <a href="#hello">{answer.answered}</a>
                 </div>
               </div>
             </div>

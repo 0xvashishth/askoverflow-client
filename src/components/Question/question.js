@@ -6,6 +6,7 @@ import { SideFeatured } from "../SideFeatured/sidefeatured"
 import { AskQuestion } from "../AskQuestion/askquestion"
 import { useParams } from "react-router-dom";
 import $ from "jquery";
+import ReactMarkdown from 'react-markdown'
 import { useEffect, useState } from "react";
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
@@ -19,6 +20,8 @@ const Question = (props) => {
   // render() {
   // const question_id = props.match.params.question_id;
   const [cookies] = useCookies(['user']);
+  const [markdownInput, setMarkdownInput] = useState()
+
   const { question_id } = useParams(); //this is for function component
   var jwttoken = cookies.jwttokenloginuser || "";
   let askquestionsign;
@@ -32,7 +35,7 @@ const Question = (props) => {
 
 
 
-  const [question, setquestion] = useState({answers:[]});
+  const [question, setquestion] = useState({ answers: [] });
   const [questiontags, setquestiontags] = useState([]);
 
   console.log(question_id);
@@ -48,8 +51,15 @@ const Question = (props) => {
             <a href="#hhh"><span class="badge question-tags">{res.data.tags[i]}</span></a>
           </div>
         }
+        // for (var i = 0; i < res.data.answers.length; i++) {
+        //   var men = res.data.answers[i].answered_by.toString().substring(0, 8);
+        //   var date = new Date(parseInt(men, 16) * 1000)
+        //   console.log(date);
+        //   // console.log(Date(res.data.answers[i].answered_by.getTimeStamp()));
+        // }
         setquestiontags(questiontags1)
         console.log(questiontags)
+        console.log("This is questions tags");
         setquestion(res.data);
         console.log(res.data.tags)
       })
@@ -66,8 +76,8 @@ const Question = (props) => {
   useEffect(() => {
     getquestion();
   }, []);
-  const allAnswers = question.answers.map(ans => <Answer answer={ans}/>);
-
+  const allAnswers = question.answers.map(ans => <Answer answer={ans} />);
+  var profile_url = "https://avatars.dicebear.com/api/gridy/" + question.asked_by + ".svg";
   console.log(question);
   return (
     <div>
@@ -96,14 +106,18 @@ const Question = (props) => {
 
                 </div>
                 <div class="row margquesions">
-                  <div class="col-lg-8 col-12">
-                    <span class="fc-light mr2">Asked</span> &nbsp;
-                    <span class="fc-dark mr2">5 years, 1 month ago</span> | &nbsp;
-                    <span class="fc-light mr2">Modified</span> &nbsp;
-                    <span class="fc-dark mr2">1 year, 2 months ago</span> | &nbsp;
+                  <div class="col-lg-7 col-7">
+                    <span class="fc-light mr2">Asked on</span> &nbsp;
+                    <span class="fc-dark mr2">{question.posted_on}</span> | &nbsp;
                     <span class="fc-light mr2">Viewed</span> &nbsp;
-                    <span class="fc-dark mr8">404k times</span>
+                    <span class="fc-dark mr8">{question.views} times</span>
                   </div>
+                  <div class="col-lg-5 col-5">
+                    <span class="fc-light mr2">Posted by</span> &nbsp;
+                    <img src={profile_url} alt="user avatar" width="32" height="32" class="bar-sm" /> &nbsp; <a href="#hello">{question.asked_by}</a>
+                  </div>
+                </div>
+                <div>
                 </div>
                 <hr />
 
@@ -111,7 +125,7 @@ const Question = (props) => {
 
                   <div class="row">
                     <div class="col-10 offset-1">
-                      <p>{question.body}</p>
+                      <ReactMarkdown children={question.body} />
                     </div>
                   </div>
                   <div>
@@ -146,11 +160,11 @@ const Question = (props) => {
                 <div>
                   {/*answersr*/}
                   {allAnswers}
-                  
+
                 </div>
 
                 <hr />
-                
+
                 {/*<LiveMarkdown />*/}
                 <AnswerPost />
               </div>
@@ -162,7 +176,7 @@ const Question = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 export default Question;

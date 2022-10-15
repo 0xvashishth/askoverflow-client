@@ -1,30 +1,33 @@
-import React, { Component } from "react";
+import React from "react";
 import "./question.css";
-import { NavForHome } from "../NavBar/NavBar";
-import { SideFeatured } from "../SideFeatured/sidefeatured"
 // import { Questions } from "../Questions/questions"
-import { AskQuestion } from "../AskQuestion/askquestion"
 import { useParams } from "react-router-dom";
 import $ from "jquery";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 
-const AnswerPost = (props) => {
-  const [answerload, setanswerload] = useState("Post Your Answer");
+const EditAnswer = (props) => {
+  const {currentAnswer} = props;
+  const [currentA, setCurrentA] = useState(currentAnswer);
+  const [answerload, setanswerload] = useState("Update Your Answer");
   const [cookies] = useCookies(['user']);
   const { question_id } = useParams();
   const jwttoken = cookies.jwttokenloginuser || "";
 
+  const changetextevent = (event) => {
+    setCurrentA(event.target.value)
+  }
+
   const PostAnswerServer = function() {
-    var textanswertopostvalue1 = $('.textanswertopost1').val();
-    console.log("herllo", jwttoken, textanswertopostvalue1);
-    if (textanswertopostvalue1 !== "") {
+    var textanswertopostvalue = $('.textanswertopost').val();
+    console.log("herllo", jwttoken, textanswertopostvalue);
+    if (textanswertopostvalue !== "") {
       setanswerload("Please Wait For A Moment...");
       axios.post('https://askoverflow-server.vashishth-patel.repl.co/answerpost', {
         questionid: question_id,
-        body: textanswertopostvalue1,
+        body: textanswertopostvalue,
         jwttokenloginuser: jwttoken
       }).then(function(response) {
         console.log(response);
@@ -36,19 +39,10 @@ const AnswerPost = (props) => {
     }
   }
 
-  var buttonforanswer = <button onClick={PostAnswerServer} class="btn btn-primary col-12" >{answerload}</button>
-
-  if (jwttoken !== "") {
-    buttonforanswer = <button onClick={PostAnswerServer} class="btn btn-primary col-12" >{answerload}</button>
-  } else {
-    buttonforanswer = <button class="float-right btnaskquestion btn btn-secondary" data-toggle="modal" data-target="#loginModal">Login To Ask Question</button>
-  }
-
 
   return (
     <>
       <div class="bottom-margin">
-        <h3>Your Answer</h3>
         <div class="col-12 border-post-answer">
           <section id="header-strip">
             <ul>
@@ -71,9 +65,10 @@ const AnswerPost = (props) => {
           <div class="col-12">
 
 
-            <textarea rows="8" class="col-12 textanswertopost1" placeholder="Give your answer" required>
+            <textarea name="editAnserTextarea" rows="8" class="col-12 textanswertopost" placeholder="Give your answer" value={currentA} onChange={changetextevent} required>
             </textarea>
-            {buttonforanswer}
+            <button type="button" class="btn btn-warning col-4" data-dismiss="modal">Close</button>
+            <button onClick={PostAnswerServer} class="btn btn-primary col-7 offset-1" >{answerload}</button>
 
           </div>
         </div>
@@ -82,4 +77,4 @@ const AnswerPost = (props) => {
     </>
   );
 }
-export default AnswerPost;
+export default EditAnswer;

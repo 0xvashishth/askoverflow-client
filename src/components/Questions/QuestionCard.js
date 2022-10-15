@@ -6,13 +6,19 @@ const QuestionCard = (props) => {
   const questionsresponse = props.question;
   const userdataname = questionsresponse.username;
   // console.log(questionsresponse.id);
+  var answertag;
+  if(questionsresponse.is_answer_verified === true){
+    answertag = <div class="paracommentbadge float-center badge badge-success">{questionsresponse.answer_count} answers</div>
+  }else{
+    answertag = <div class="paracommentbadge float-center badge badge-secondary">{questionsresponse.answer_count} answers</div>
+  }
   var avatarlink = "https://avatars.dicebear.com/api/gridy/" + userdataname + ".svg"
   return (
     <>
       <div class="row">
         <div class="col-md-2 commenttagview">
           <div class="paracomment float-center">{questionsresponse.answer_count} comments</div>
-          <div class="paracommentbadge float-center badge badge-success">{questionsresponse.answer_count} answers</div>
+          {answertag}
           <div class="paracomment float-center">{questionsresponse.tags.length} Tags</div>
           <div class="paracomment float-center">{questionsresponse.views} views</div>
         </div>

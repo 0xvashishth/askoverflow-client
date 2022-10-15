@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./question.css";
 import { NavForHome } from "../NavBar/NavBar";
 import { SideFeatured } from "../SideFeatured/sidefeatured"
-// import { Questions } from "../Questions/questions"
 import { AskQuestion } from "../AskQuestion/askquestion"
 import { useParams } from "react-router-dom";
 import $ from "jquery";
@@ -10,7 +9,7 @@ import ReactMarkdown from 'react-markdown'
 import { useEffect, useState } from "react";
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import AnswerPost from './postAnswer.js'
+import AnswerPost from './postAnswer.js';
 import Answer from './questionAnswer.js';
 import Sidebar from '../HomePage/sidebar.js';
 // import LiveMarkdown from './editor.js';

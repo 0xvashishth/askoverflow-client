@@ -12,6 +12,7 @@ import axios from 'axios';
 import AnswerPost from './postAnswer.js';
 import Answer from './questionAnswer.js';
 import Sidebar from '../HomePage/sidebar.js';
+import EditQuestion from './editQuestion.js';
 // import LiveMarkdown from './editor.js';
 
 // class Question extends Component {
@@ -36,7 +37,7 @@ const Question = (props) => {
   }
 
 
-
+  const userid = cookies.userid;
   const [question, setquestion] = useState({ answers: [] });
   const [questiontags, setquestiontags] = useState(imgforload);
 
@@ -68,10 +69,10 @@ const Question = (props) => {
         // console.log(res.data.tags)
       })
       .catch(err => {
-        window.alert('Error from server!!',err);
+        window.alert('Error from server!!', err);
       })
   }
- function addQuestionVote(vote) {
+  function addQuestionVote(vote) {
     // https://user-images.githubusercontent.com/76911582/190166775-b792861c-f01f-4a69-b406-e08a0adf0fd0.gif
     if (jwttoken !== "") {
       var prevcount = question_count_vote;
@@ -113,6 +114,20 @@ const Question = (props) => {
   }, []);
   const allAnswers = question.answers.map(ans => <Answer answer={ans} />);
   var profile_url = "https://avatars.dicebear.com/api/gridy/" + question.asked_by + ".svg";
+
+  // edit, share and follow for question
+
+  let linkquestion = "#" + question.id;
+
+  let editQuestionLink = <span className="fc-light mr2" data-toggle="modal" data-target="#loginModal"><a href="#loginModal">edit &nbsp;</a></span>;
+
+  if (jwttoken !== "") {
+    if (userid === question.posted_by) {
+      editQuestionLink = <span className="fc-light mr2" data-toggle="modal" data-target={'#editQuestion' + question._id}><a href="#editQuestion">edit &nbsp;</a></span>;
+    } else {
+      editQuestionLink = " ";
+    }
+  }
   // console.log(question);
   return (
     <div>
@@ -132,7 +147,7 @@ const Question = (props) => {
                   </div>
                 </div>
                 <div class="row margquesions">
-                  <div className="col-2">
+                  <div className="col-lg-1 col-md-1 col-sm-1 col-2">
                     <div>
                       <div className="btnupdown btn-primary" onClick={event => addQuestionVote(1)}>
                         <i class="fas btnupdownicon fa-chevron-up"></i>
@@ -145,26 +160,41 @@ const Question = (props) => {
                       </div>
                     </div>
                   </div>
-                  <div class="col-10">
-                    <h1 itemprop="name" class="fs-headline1 ow-break-word mb8 flex--item fl1">
+                  <div class="col-lg-11 col-md-11 col-sm-11 col-10">
+                    <div itemprop="name" class="fs-headline1 ow-break-word mb8 flex--item fl1">
                       <a href={`/question/${question_id}`} class="question-hyperlink">{question.header}
                       </a>
-                    </h1>
+                    </div>
                   </div>
 
                 </div>
                 <div class="row margquesions">
-                  <div class="col-lg-7 col-7">
+                  <div class="col-lg-7 col-7 askdetails">
                     <span class="fc-light mr2">Asked on</span> &nbsp;
                     <span class="fc-dark mr2">{question.posted_on}</span> | &nbsp;
                     <span class="fc-light mr2">Viewed</span> &nbsp;
                     <span class="fc-dark mr8">{question.views} times</span>
                   </div>
-                  <div class="col-lg-5 col-5">
+                  <div class="col-lg-5 col-5 askdetails">
                     <span class="fc-light mr2">Posted by</span> &nbsp;
                     <img src={profile_url} alt="user avatar" width="32" height="32" class="bar-sm" /> &nbsp; <a href="#hello">{question.asked_by}</a>
                   </div>
                 </div>
+                {/* edit share and follow start */}
+                <div class="row">
+                  <div className="col-8">
+                    <span className="fc-light mr2"><a href={linkquestion}>share</a></span> &nbsp;
+                    {editQuestionLink}
+                    {/* edit answer modal start */}
+                    <div class="modal fade" id={'editQuestion' + question._id} tabindex="-1" role="dialog" aria-labelledby="editQuestionCenterTitle" aria-hidden="true">
+                      <EditQuestion questionHeader={question.header} questionTags={question.tags} questionBody={question.body} />
+                    </div>
+                    {/* edit answer modal end */}
+                    <span className="fc-light mr2"><a href="#hello">follow</a></span> &nbsp;
+                  </div>
+                </div>
+                {/* edit share and follow end */}
+
                 <div>
                 </div>
                 <hr />

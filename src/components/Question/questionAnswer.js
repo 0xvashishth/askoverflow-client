@@ -13,6 +13,7 @@ const Answer = (props) => {
   const [markdownInput, setMarkdownInput] = useState()
   var checkrightvariable = <div><i class="fa fa-check"></i></div>
   const [checkright, setcheckright] = useState(answer.is_verified ? checkrightvariable : '');
+  var linkanswer = "#" + answer._id;
   const [count_vote, setcount_vote] = useState(answer.liked_by.length - answer.unliked_by.length);
   const profile_url = "https://avatars.dicebear.com/api/gridy/" + answer.answered + ".svg";
   const jwttoken = cookies.jwttokenloginuser || "";
@@ -71,7 +72,7 @@ const Answer = (props) => {
   return (
     <>
       <div className="row">
-        <div className="col-2">
+        <div className="col-lg-1 col-md-1 col-sm-1 col-2">
           <div>
             <div className="btnupdown btn-primary" onClick={event => addVote(1)}><i class="fas btnupdownicon fa-chevron-up"></i></div>
           </div>
@@ -81,7 +82,7 @@ const Answer = (props) => {
           </div>
           {checkright}
         </div>
-        <div className="col-10 bg-light text-dark">
+        <div className="col-lg-11 col-md-11 col-sm-11 col-10 bg-light text-dark">
           <div className="row">
 
             <div className="col-12">
@@ -90,7 +91,7 @@ const Answer = (props) => {
           </div>
           <div class="row">
             <div className="col-8">
-              <span className="fc-light mr2"><a href="#hello">share</a></span> &nbsp;
+              <span className="fc-light mr2"><a href={linkanswer}>share</a></span> &nbsp;
               {editAnswerLink}
               {/* edit answer modal start */}
               <div class="modal fade" id={'editAnswer' + answer._id} tabindex="-1" role="dialog" aria-labelledby="editAnswerCenterTitle" aria-hidden="true">

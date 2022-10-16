@@ -65,11 +65,18 @@
     margin-left: -10px;
     font-size : 30px;
   }
+  .askdetails {
+    font-size : 15px;
+  }
 }
 
 @media only screen and (max-width: 450px) {
   .question-hyperlink {
     margin-left: -20px;
-    font-size : 15px;
+    font-size : 20px;
+  }
+  .askdetails {
+    font-size : 10px;
   }
 }
+

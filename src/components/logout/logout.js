@@ -4,11 +4,12 @@ import { Redirect } from "react-router-dom";
 
 const logoutuser = (props) => {
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
-  console.log("logout out if");
   if (cookies.jwttokenloginuser) {
-    removeCookie('jwttokenloginuser', {path: "/"});
+    removeCookie('jwttokenloginuser', { path: "/" });
   }
-
+  if (cookies.userid) {
+    removeCookie('userid', { path: "/" });
+  }
   return (
     <div>
       <h1>Logout</h1>

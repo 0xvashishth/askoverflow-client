@@ -1,10 +1,8 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import ReactMarkdown from 'react-markdown'
-import AnswerPost from './postAnswer.js';
 import EditAnswer from './editAnswer.js';
 import { useCookies } from 'react-cookie';
-import axios, {AxiosResponse, AxiosError} from 'axios';
-import $ from "jquery";
+import axios, { AxiosResponse, AxiosError } from 'axios';
 // import React, { useState } from 'react'
 
 import "./question.css";
@@ -18,24 +16,25 @@ const Answer = (props) => {
   const [count_vote, setcount_vote] = useState(answer.liked_by.length - answer.unliked_by.length);
   const profile_url = "https://avatars.dicebear.com/api/gridy/" + answer.answered + ".svg";
   const jwttoken = cookies.jwttokenloginuser || "";
+  const userid = cookies.userid;
   var imgforloadvote = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="15px" />
 
   function addVote(vote) {
     // https://user-images.githubusercontent.com/76911582/190166775-b792861c-f01f-4a69-b406-e08a0adf0fd0.gif
-    if(jwttoken !== ""){
+    if (jwttoken !== "") {
       var prevcount = count_vote;
-    setcount_vote(imgforloadvote)
-    // console.log(vote);
-    // console.log(answer._id,jwttoken)
+      setcount_vote(imgforloadvote)
+      // console.log(vote);
+      // console.log(answer._id,jwttoken)
       // JSON.stringify(error)
-    axios.post('https://askoverflow-server.vashishth-patel.repl.co/answervote', {
+      axios.post('https://askoverflow-server.vashishth-patel.repl.co/answervote', {
         answerid: answer._id,
         vote: vote,
         jwttokenloginuser: jwttoken
-      }).then(function(response : AxiosResponse) {
+      }).then(function(response: AxiosResponse) {
         // console.log(response);
         // console.log(response.data.given_vote);
-        var givenvote = response.data.given_vote; 
+        var givenvote = response.data.given_vote;
         // var res = JSON.parse(response);
         // var heycount = res.data.given_vote;
         setcount_vote(prevcount + givenvote);
@@ -46,25 +45,28 @@ const Answer = (props) => {
         // else{
         //   window.alert(response.error);
         // }
-      }).catch(function(error : AxiosError){
+      }).catch(function(error: AxiosError) {
         // console.log(error.response.data.error);
         window.alert(error.response.data.error);
         setcount_vote(prevcount);
       });
-    }else{
+    } else {
       window.alert("Please login to vote");
     }
   }
-  
-    
+
+
   const jwttoken1 = cookies.jwttokenloginuser || "";
-    
-  var editAnswerLink = <span className="fc-light mr2" data-toggle="modal" data-target="#loginModal"><a href="#loginModal">edit</a></span>;
+  var editAnswerLink = <span className="fc-light mr2" data-toggle="modal" data-target="#loginModal"><a href="#loginModal">edit &nbsp;</a></span>
 
   if (jwttoken1 !== "") {
-    editAnswerLink = <span className="fc-light mr2" data-toggle="modal" data-target={'#editAnswer'+answer._id}><a href="#editAnswer">edit</a></span>;
+    if (userid === answer.answered_by) {
+      editAnswerLink = <span className="fc-light mr2" data-toggle="modal" data-target={'#editAnswer' + answer._id}><a href="#editAnswer">edit &nbsp;</a></span>;
+    } else {
+      editAnswerLink = " ";
+    }
   }
-  
+
   // console.log(answer)
   return (
     <>
@@ -90,9 +92,8 @@ const Answer = (props) => {
             <div className="col-8">
               <span className="fc-light mr2"><a href="#hello">share</a></span> &nbsp;
               {editAnswerLink}
-              &nbsp;
               {/* edit answer modal start */}
-              <div class="modal fade" id={'editAnswer'+answer._id} tabindex="-1" role="dialog" aria-labelledby="editAnswerCenterTitle" aria-hidden="true">
+              <div class="modal fade" id={'editAnswer' + answer._id} tabindex="-1" role="dialog" aria-labelledby="editAnswerCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">

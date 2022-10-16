@@ -90,6 +90,10 @@ const NavForHome = (props) => {
               path: "/",
               expires: new Date(Date.now() + 60000000),
             });
+            setCookie('userid', resjson.userId, {
+              path: "/",
+              expires: new Date(Date.now() + 60000000),
+            });
             console.log(resjson.jwttokenloginuser);
             window.alert(resjson.message);
             window.location.reload();

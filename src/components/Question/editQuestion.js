@@ -8,28 +8,57 @@ import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 const EditQuestion = (props) => {
-  const { questionHeader, questionTags, questionBody } = props;
-  console.log(questionHeader,questionTags,questionBody);
+  const { questionHeader, questionTags, questionBody, questionId } = props;
+  const [cookies] = useCookies(['user']);
+  // console.log(questionHeader,questionTags,questionBody);
   // var hello = questionHeader
   const [qheader, setQheader] = useState(questionHeader);
   const [qtags, setQtags] = useState(questionTags);
   const [qbody, setQbody] = useState(questionBody);
-  console.log(qheader);
+  const [qid, setQid] = useState(questionId);
+  const [answerload, setanswerload] = useState("Update Your Question");
+  // console.log(qheader);
+  var jwttoken = cookies.jwttokenloginuser || "";
 
   // This will render only for once, because the props are set initially undefined
-  useEffect(() => { setQheader(questionHeader); setQtags(questionTags); setQbody(questionBody)}, [questionHeader,questionTags,questionBody] )
+  useEffect(() => { setQheader(questionHeader); setQtags(questionTags); setQbody(questionBody); setQid(questionId); }, [questionHeader,questionTags,questionBody,questionId] )
   
   const editQHeader = (event) => {
     setQheader(event.target.value)
   }
-
   const editQTags = (event) => {
     setQtags(event.target.value)
   }
-
   const editQBody = (event) => {
     setQbody(event.target.value)
   }
+
+    const EditQuestionServer = function() {
+    // var textanswertopostvalue = $('.textanswertoedit').val();
+    // console.log("herllo", jwttoken, textanswertopostvalue);
+    if (editQHeader !== "" || editQBody !== "") {
+      var arraytags = qtags.split(',');
+      console.log(qid,qbody,jwttoken,arraytags,editQHeader)
+      setanswerload("Please Wait For A Moment...");
+      axios.post('https://askoverflow-server.vashishth-patel.repl.co/questionedit', {
+        questionid: qid,
+        body: qbody,
+        jwttokenloginuser: jwttoken,
+        tags: arraytags,
+        header: qheader
+      }).then(function(response) {
+        console.log(response);
+        window.location.replace("/question/" + qid);
+      }).catch(function(err){
+        console.log(err);
+        window.alert("Something Went Wrong!!");
+      });
+    }
+    else {
+      window.alert("All Fields Are Required!");
+    }
+  }
+  
   return (
     <>
       <div class="modal-dialog modal-dialog-centered modal-fullscreen modal-xl ">
@@ -57,7 +86,7 @@ const EditQuestion = (props) => {
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Update A Question</button>
+            <button type="button" onClick={EditQuestionServer} class="btn btn-primary">{answerload}</button>
           </div>
         </div>
       </div>

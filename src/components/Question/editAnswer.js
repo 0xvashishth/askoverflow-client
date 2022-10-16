@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 const EditAnswer = (props) => {
-  const {currentAnswer} = props;
+  const {currentAnswer, answerId} = props;
   const [currentA, setCurrentA] = useState(currentAnswer);
   const [answerload, setanswerload] = useState("Update Your Answer");
   const [cookies] = useCookies(['user']);
@@ -20,22 +20,25 @@ const EditAnswer = (props) => {
     setCurrentA(event.target.value)
   }
 
-  const PostAnswerServer = function() {
-    var textanswertopostvalue = $('.textanswertopost').val();
-    console.log("herllo", jwttoken, textanswertopostvalue);
-    if (textanswertopostvalue !== "") {
+  const EditAnswerServer = function() {
+    // var textanswertopostvalue = $('.textanswertoedit').val();
+    // console.log("herllo", jwttoken, textanswertopostvalue);
+    if (currentA !== "") {
       setanswerload("Please Wait For A Moment...");
-      axios.post('https://askoverflow-server.vashishth-patel.repl.co/answerpost', {
-        questionid: question_id,
-        body: textanswertopostvalue,
+      axios.post('https://askoverflow-server.vashishth-patel.repl.co/answeredit', {
+        answerid: answerId,
+        body: currentA,
         jwttokenloginuser: jwttoken
       }).then(function(response) {
         console.log(response);
         window.location.replace("/question/" + question_id);
+      }).catch(function(err){
+        console.log(err);
+        window.alert("Something Went Wrong!!");
       });
     }
     else {
-      console.log("no text available");
+      window.alert("no text available");
     }
   }
 
@@ -65,10 +68,10 @@ const EditAnswer = (props) => {
           <div class="col-12">
 
 
-            <textarea name="editAnserTextarea" rows="8" class="col-12 textanswertopost" placeholder="Give your answer" value={currentA} onChange={changetextevent} required>
+            <textarea name="editAnserTextarea" rows="8" class="col-12 textanswertoedit" placeholder="Give your answer" value={currentA} onChange={changetextevent} required>
             </textarea>
             <button type="button" class="btn btn-warning col-4" data-dismiss="modal">Close</button>
-            <button onClick={PostAnswerServer} class="btn btn-primary col-7 offset-1" >{answerload}</button>
+            <button onClick={EditAnswerServer} class="btn btn-primary col-7 offset-1" >{answerload}</button>
 
           </div>
         </div>

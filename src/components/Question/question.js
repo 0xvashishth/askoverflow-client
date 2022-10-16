@@ -187,7 +187,7 @@ const Question = (props) => {
                     {editQuestionLink}
                     {/* edit answer modal start */}
                     <div class="modal fade" id={'editQuestion' + question._id} tabindex="-1" role="dialog" aria-labelledby="editQuestionCenterTitle" aria-hidden="true">
-                      <EditQuestion questionHeader={question.header} questionTags={question.tags} questionBody={question.body} />
+                      <EditQuestion questionHeader={question.header} questionTags={question.tags} questionBody={question.body} questionId={question._id}/>
                     </div>
                     {/* edit answer modal end */}
                     <span className="fc-light mr2"><a href="#hello">follow</a></span> &nbsp;

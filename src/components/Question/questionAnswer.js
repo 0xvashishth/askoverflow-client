@@ -104,7 +104,7 @@ const Answer = (props) => {
                       </button>
                     </div>
                     <div class="modal-body">
-                      <EditAnswer currentAnswer={answer.answer_body} />
+                      <EditAnswer currentAnswer={answer.answer_body} answerId={answer._id} />
                     </div>
                   </div>
                 </div>

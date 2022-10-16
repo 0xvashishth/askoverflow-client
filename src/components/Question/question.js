@@ -37,7 +37,7 @@ const Question = (props) => {
   const [question, setquestion] = useState({ answers: [] });
   const [questiontags, setquestiontags] = useState([]);
 
-  console.log(question_id);
+  // console.log(question_id);
 
   const getquestion = async () => {
     axios
@@ -57,13 +57,13 @@ const Question = (props) => {
         //   // console.log(Date(res.data.answers[i].answered_by.getTimeStamp()));
         // }
         setquestiontags(questiontags1)
-        console.log(questiontags)
-        console.log("This is questions tags");
+        // console.log(questiontags)
+        // console.log("This is questions tags");
         setquestion(res.data);
-        console.log(res.data.tags)
+        // console.log(res.data.tags)
       })
       .catch(err => {
-        console.log('Error from server!!');
+        window.alert('Error from server!!');
       })
 
 
@@ -77,7 +77,7 @@ const Question = (props) => {
   }, []);
   const allAnswers = question.answers.map(ans => <Answer answer={ans} />);
   var profile_url = "https://avatars.dicebear.com/api/gridy/" + question.asked_by + ".svg";
-  console.log(question);
+  // console.log(question);
   return (
     <div>
       <NavForHome />

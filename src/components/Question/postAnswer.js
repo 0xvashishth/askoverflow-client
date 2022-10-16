@@ -19,7 +19,7 @@ const AnswerPost = (props) => {
 
   const PostAnswerServer = function() {
     var textanswertopostvalue1 = $('.textanswertopost1').val();
-    console.log("herllo", jwttoken, textanswertopostvalue1);
+    // console.log("herllo", jwttoken, textanswertopostvalue1);
     if (textanswertopostvalue1 !== "") {
       setanswerload("Please Wait For A Moment...");
       axios.post('https://askoverflow-server.vashishth-patel.repl.co/answerpost', {
@@ -27,12 +27,12 @@ const AnswerPost = (props) => {
         body: textanswertopostvalue1,
         jwttokenloginuser: jwttoken
       }).then(function(response) {
-        console.log(response);
+        // console.log(response);
         window.location.replace("/question/" + question_id);
       });
     }
     else {
-      console.log("no text available");
+      window.alert("No text available");
     }
   }
 

@@ -3,6 +3,8 @@ import ReactMarkdown from 'react-markdown'
 import AnswerPost from './postAnswer.js';
 import EditAnswer from './editAnswer.js';
 import { useCookies } from 'react-cookie';
+import axios, {AxiosResponse, AxiosError} from 'axios';
+import $ from "jquery";
 // import React, { useState } from 'react'
 
 import "./question.css";
@@ -13,11 +15,45 @@ const Answer = (props) => {
   const [markdownInput, setMarkdownInput] = useState()
   var checkrightvariable = <div><i class="fa fa-check"></i></div>
   const [checkright, setcheckright] = useState(answer.is_verified ? checkrightvariable : '');
+  const [count_vote, setcount_vote] = useState(answer.liked_by.length - answer.unliked_by.length);
   const profile_url = "https://avatars.dicebear.com/api/gridy/" + answer.answered + ".svg";
+  const jwttoken = cookies.jwttokenloginuser || "";
+  var imgforloadvote = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="15px" />
 
-
-  function addVote(data, vote) {
-    console.log(data, vote);
+  function addVote(vote) {
+    // https://user-images.githubusercontent.com/76911582/190166775-b792861c-f01f-4a69-b406-e08a0adf0fd0.gif
+    if(jwttoken !== ""){
+      var prevcount = count_vote;
+    setcount_vote(imgforloadvote)
+    // console.log(vote);
+    // console.log(answer._id,jwttoken)
+      // JSON.stringify(error)
+    axios.post('https://askoverflow-server.vashishth-patel.repl.co/answervote', {
+        answerid: answer._id,
+        vote: vote,
+        jwttokenloginuser: jwttoken
+      }).then(function(response : AxiosResponse) {
+        // console.log(response);
+        // console.log(response.data.given_vote);
+        var givenvote = response.data.given_vote; 
+        // var res = JSON.parse(response);
+        // var heycount = res.data.given_vote;
+        setcount_vote(prevcount + givenvote);
+        // if(response.status === 201) {
+        //   setcount_vote(answer.liked_by.length - answer.unliked_by.length + response.given_vote);
+        //   // window.alert(response.message);
+        // }
+        // else{
+        //   window.alert(response.error);
+        // }
+      }).catch(function(error : AxiosError){
+        // console.log(error.response.data.error);
+        window.alert(error.response.data.error);
+        setcount_vote(prevcount);
+      });
+    }else{
+      window.alert("Please login to vote");
+    }
   }
   
     
@@ -29,17 +65,17 @@ const Answer = (props) => {
     editAnswerLink = <span className="fc-light mr2" data-toggle="modal" data-target={'#editAnswer'+answer._id}><a href="#editAnswer">edit</a></span>;
   }
   
-  console.log(answer)
+  // console.log(answer)
   return (
     <>
       <div className="row">
         <div className="col-2">
           <div>
-            <div className="btnupdown btn-primary" onClick={event => addVote(answer._id, 1)}><i class="fas btnupdownicon fa-chevron-up"></i></div>
+            <div className="btnupdown btn-primary" onClick={event => addVote(1)}><i class="fas btnupdownicon fa-chevron-up"></i></div>
           </div>
-          <div className="mrginevotescountanswer">{answer.liked_by.length}</div>
+          <div className="mrginevotescountanswer">{count_vote}</div>
           <div>
-            <div className="btnupdown btn-primary" onClick={event => addVote(answer._id, -1)}><i class="fas btnupdownicon fa-chevron-down"></i></div>
+            <div className="btnupdown btn-primary" onClick={event => addVote(-1)}><i class="fas btnupdownicon fa-chevron-down"></i></div>
           </div>
           {checkright}
         </div>

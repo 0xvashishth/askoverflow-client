@@ -4,13 +4,17 @@ import $ from "jquery";
 import "./script.js"
 import { useCookies } from 'react-cookie';
 import { useHistory } from "react-router-dom";
+// import UserQuestion from "./userquestion";
+import Questions from "./UserQuestions/Questions";
+
 
 const userprofile = () => {
   const [cookies] = useCookies(['user']);
-  var loader = <img alt="loader" src="https://user-images.githubusercontent.com/76911582/190166775-b792861c-f01f-4a69-b406-e08a0adf0fd0.gif" style={{ height: "200px" }} />
-  var [questionData, setQuestionData] = useState(loader);
-  const [userData = {}, setUserData] = useState();
-  const [questioncount, setQuestionCount] = useState();
+  var imgforload = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="20px" />
+  var imgforload1 = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="70px" />
+  const [userData = {}, setUserData] = useState(imgforload);
+  const [loaderforwait, setloaderforwait] = useState(imgforload1);
+  const [questioncount, setQuestionCount] = useState(imgforload);
   const history = useHistory();
 
   const callUserPage = async () => {
@@ -29,12 +33,11 @@ const userprofile = () => {
       const userdata = await res.json();
 
       const userdataname = userdata.rootUser.username;
-      console.log(userdataname);
       userdata.rootUser.avatarlink = "https://avatars.dicebear.com/api/gridy/" + userdataname + ".svg"
 
       setUserData(userdata.rootUser);
       setQuestionCount(userdata.allquestions);
-      console.log(userdata.allquestions);
+      setloaderforwait();
       if (res.status !== 200) {
         const error = new Error(res.error);
         throw error;
@@ -52,7 +55,6 @@ const userprofile = () => {
   const toggleusermenu = () => {
     $(".sidebar").toggleClass("active");
   }
-
   const openPage = (event, pageName) => {
     var i, pagecontent;
     pagecontent = document.getElementsByClassName("Right-bar");
@@ -63,36 +65,6 @@ const userprofile = () => {
     var tempPageName = "#" + pageName;
     $(tempPageName).css("display", "block");
     event.currentTarget.className += " active";
-    if (pageName === "user_questions") {
-      const postLoginData = async () => {
-        try {
-          const res = await fetch('https://askoverflow-server.vashishth-patel.repl.co/publicquestionsget', {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              jwttokenloginuser: cookies.jwttokenloginuser
-            }),
-            creadentials: "include"
-          });
-          const userdata = await res.json();
-          // console.log(userdata);
-          // console.log(questionData);
-          let arrayquestion = []
-          for (i in userdata) {
-            arrayquestion[i] = <tr class="row"><td className="col-10"><a href={`/question/${userdata[i].id}`}>{userdata[i].header}</a></td><td className="col-2"></td><hr /></tr>
-          }
-          setQuestionData(arrayquestion);
-
-        } catch (err) {
-          console.log(err);
-          history.push('/');
-        }
-      }
-      postLoginData();
-    }
   }
 
   return (
@@ -213,7 +185,7 @@ const userprofile = () => {
 
             <div class="row container">
               <div class="col-10 container">
-
+                {loaderforwait}
               </div>
             </div>
 
@@ -233,18 +205,7 @@ const userprofile = () => {
         </div>
 
         <div class="home-content Right-bar" id="user_questions" style={{ display: "none" }}>
-          <div class="container">
-            <h3>My Questions</h3>
-            <br></br>
-            <div class="row container">
-              <table class="table">
-                <tbody class="float-left">
-                  {questionData}
-                </tbody>
-              </table>
-            </div>
-
-          </div>
+          <Questions />
         </div>
 
         <div class="home-content Right-bar" id="user_comments" style={{ display: "none" }}>

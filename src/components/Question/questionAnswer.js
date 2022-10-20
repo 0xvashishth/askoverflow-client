@@ -4,11 +4,12 @@ import EditAnswer from './editAnswer.js';
 import { useCookies } from 'react-cookie';
 import axios, { AxiosResponse, AxiosError } from 'axios';
 // import React, { useState } from 'react'
+import ShareLink from './ShareLink.js';
 
 import "./question.css";
 
 const Answer = (props) => {
-  const { key, answer } = props;
+  const { key, answer, mtype, aid } = props;
   const [cookies] = useCookies(['user']);
   const [markdownInput, setMarkdownInput] = useState()
   var checkrightvariable = <div><i class="fa fa-check"></i></div>
@@ -83,7 +84,7 @@ const Answer = (props) => {
           {checkright}
         </div>
         <div className="col-lg-11 col-md-11 col-sm-11 col-10 bg-light text-dark">
-          <div className="row">
+          <div className="row" id={mtype + aid}>
 
             <div className="col-12">
               <ReactMarkdown children={answer.answer_body} />
@@ -91,7 +92,8 @@ const Answer = (props) => {
           </div>
           <div class="row">
             <div className="col-8">
-              <span className="fc-light mr2"><a href={linkanswer}>share</a></span> &nbsp;
+              {/* <span className="fc-light mr2"><a href={linkanswer}>share</a></span> &nbsp; */}
+              <ShareLink mylink={answer.answered_by} mtype={mtype} aid={aid} />
               {editAnswerLink}
               {/* edit answer modal start */}
               <div class="modal fade" id={'editAnswer' + answer._id} tabindex="-1" role="dialog" aria-labelledby="editAnswerCenterTitle" aria-hidden="true">

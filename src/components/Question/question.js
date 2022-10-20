@@ -13,6 +13,7 @@ import AnswerPost from './postAnswer.js';
 import Answer from './questionAnswer.js';
 import Sidebar from '../HomePage/sidebar.js';
 import EditQuestion from './editQuestion.js';
+import ShareLink from './ShareLink.js';
 // import LiveMarkdown from './editor.js';
 
 // class Question extends Component {
@@ -112,12 +113,20 @@ const Question = (props) => {
   useEffect(() => {
     getquestion();
   }, []);
-  const allAnswers = question.answers.map(ans => <Answer answer={ans} />);
+  let index = 0;
+  // function getAnswerList(ans) {
+  //   index++;
+  //   return <Answer answer={ans} mtype= {"answer"} aid={index} />;
+  // }
+  // const allAnswers = question.answers.map(getAnswerList);
+  // console.log(allAnswers);
+  const allAnswers = question.answers.map((ans) => {
+    index++;
+    return <Answer answer={ans} mtype={"answer"} aid={index} />;
+  });
   var profile_url = "https://avatars.dicebear.com/api/gridy/" + question.asked_by + ".svg";
 
   // edit, share and follow for question
-
-  let linkquestion = "#" + question.id;
 
   let editQuestionLink = <span className="fc-light mr2" data-toggle="modal" data-target="#loginModal"><a href="#loginModal">edit &nbsp;</a></span>;
 
@@ -183,11 +192,11 @@ const Question = (props) => {
                 {/* edit share and follow start */}
                 <div class="row">
                   <div className="col-8">
-                    <span className="fc-light mr2"><a href={linkquestion}>share</a></span> &nbsp;
+                    <ShareLink mylink={question._id} mtype={"question"} aid={1} />
                     {editQuestionLink}
                     {/* edit answer modal start */}
                     <div class="modal fade" id={'editQuestion' + question._id} tabindex="-1" role="dialog" aria-labelledby="editQuestionCenterTitle" aria-hidden="true">
-                      <EditQuestion questionHeader={question.header} questionTags={question.tags} questionBody={question.body} questionId={question._id}/>
+                      <EditQuestion questionHeader={question.header} questionTags={question.tags} questionBody={question.body} questionId={question._id} />
                     </div>
                     {/* edit answer modal end */}
                     <span className="fc-light mr2"><a href="#hello">follow</a></span> &nbsp;

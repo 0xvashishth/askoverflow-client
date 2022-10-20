@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import "./question.css";
-import { NavForHome } from "../NavBar/NavBar";
-import { SideFeatured } from "../SideFeatured/sidefeatured"
+// import { NavForHome } from "../NavBar/NavBar";
+// import { SideFeatured } from "../SideFeatured/sidefeatured"
 // import { Questions } from "../Questions/questions"
-import { AskQuestion } from "../AskQuestion/askquestion"
+// import { AskQuestion } from "../AskQuestion/askquestion"
 import { useParams } from "react-router-dom";
 import $ from "jquery";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 

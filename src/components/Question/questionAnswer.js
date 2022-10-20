@@ -9,17 +9,18 @@ import ShareLink from './ShareLink.js';
 import "./question.css";
 
 const Answer = (props) => {
-  const { key, answer, mtype, aid } = props;
+  const { answer, mtype, aid } = props;
+  // const {key} = props;
   const [cookies] = useCookies(['user']);
-  const [markdownInput, setMarkdownInput] = useState()
+  // const [setMarkdownInput] = useState()
   var checkrightvariable = <div><i class="fa fa-check"></i></div>
-  const [checkright, setcheckright] = useState(answer.is_verified ? checkrightvariable : '');
-  var linkanswer = "#" + answer._id;
+  const [checkright] = useState(answer.is_verified ? checkrightvariable : ''); //setcheckright never used
+  // var linkanswer = "#" + answer._id;
   const [count_vote, setcount_vote] = useState(answer.liked_by.length - answer.unliked_by.length);
   const profile_url = "https://avatars.dicebear.com/api/gridy/" + answer.answered + ".svg";
   const jwttoken = cookies.jwttokenloginuser || "";
   const userid = cookies.userid;
-  var imgforloadvote = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="15px" />
+  var imgforloadvote = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="15px" alt="#img"/>
 
   function addVote(vote) {
     // https://user-images.githubusercontent.com/76911582/190166775-b792861c-f01f-4a69-b406-e08a0adf0fd0.gif

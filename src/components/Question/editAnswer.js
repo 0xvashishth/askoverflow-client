@@ -2,7 +2,7 @@ import React from "react";
 import "./question.css";
 // import { Questions } from "../Questions/questions"
 import { useParams } from "react-router-dom";
-import $ from "jquery";
+// import $ from "jquery";
 import { useState } from "react";
 import { useCookies } from 'react-cookie';
 import axios from 'axios';

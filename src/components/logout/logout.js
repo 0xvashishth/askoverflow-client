@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie';
 import { Redirect } from "react-router-dom";
 
 const logoutuser = (props) => {
-  const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const [cookies, removeCookie] = useCookies(['user']);
   if (cookies.jwttokenloginuser) {
     removeCookie('jwttokenloginuser', { path: "/" });
   }

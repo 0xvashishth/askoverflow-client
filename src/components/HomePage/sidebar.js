@@ -4,9 +4,9 @@ import $ from "jquery";
 
 class Sidebar extends Component {
 
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   jquerychangecss = () => {
     $(".clickleftmenu").click(function() {
@@ -69,7 +69,7 @@ class Sidebar extends Component {
               id="item-3"
             >
               <a
-                href="#"
+                href="#hello"
                 id="clickleftmenu1"
                 style={{ textDecoration: "none" }}
                 class=" clickleftmenu list-group-item bg-light bg-gradient"

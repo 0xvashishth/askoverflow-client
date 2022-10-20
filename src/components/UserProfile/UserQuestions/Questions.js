@@ -1,11 +1,11 @@
 import React from "react";
 import "./Questions.css";
 // import { Questions } from "../Questions/questions"
-import { useParams } from "react-router-dom";
-import $ from "jquery";
+// import { useParams } from "react-router-dom";
+// import $ from "jquery";
 import { useEffect,useState } from "react";
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
+// import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import UserQuestion from "./userquestion";
 
@@ -14,14 +14,14 @@ const Questions = (props) => {
   // const {question} = props;
   const history = useHistory();
   const [cookies] = useCookies(['user']);
-    var imgforload1 = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="70px" />
+    var imgforload1 = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="70px" alt="#img" />
   // console.log(question)
   const [AllQuestions, setAllQuestions] = useState(imgforload1);
   // var AllQuestion
   // if(question.type != 'img'){
   //  AllQuestion = question.map(ans => <UserQuestion question={ans} />);
   // }
-  const jwttoken = cookies.jwttokenloginuser || "";
+  // const jwttoken = cookies.jwttokenloginuser || "";
 
   const QuestionDataGet = async () => {
         try {

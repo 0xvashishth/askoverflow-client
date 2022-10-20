@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import "./question.css";
 import { NavForHome } from "../NavBar/NavBar";
 import { SideFeatured } from "../SideFeatured/sidefeatured"
 import { AskQuestion } from "../AskQuestion/askquestion"
 import { useParams } from "react-router-dom";
-import $ from "jquery";
+// import $ from "jquery";
 import ReactMarkdown from 'react-markdown'
 import { useEffect, useState } from "react";
 import { useCookies } from 'react-cookie';
@@ -21,9 +21,9 @@ const Question = (props) => {
   // render() {
   // const question_id = props.match.params.question_id;
   const [cookies] = useCookies(['user']);
-  const [markdownInput, setMarkdownInput] = useState()
-  var imgforloadvote = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="15px" />
-  var imgforload = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="60px" />
+  // const [markdownInput, setMarkdownInput] = useState()
+  var imgforloadvote = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="15px" alt="#img" />
+  var imgforload = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="60px" alt="#img"/>
   const [question_count_vote, setquestion_count_vote] = useState(imgforloadvote);
 
   const { question_id } = useParams(); //this is for function component

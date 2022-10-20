@@ -1,20 +1,20 @@
 import React from "react";
 import "./Questions.css";
 // import { Questions } from "../Questions/questions"
-import { useParams } from "react-router-dom";
-import $ from "jquery";
-import { useState } from "react";
-import { useCookies } from 'react-cookie';
-import axios from 'axios';
+// import { useParams } from "react-router-dom";
+// import $ from "jquery";
+// import { useState } from "react";
+// import { useCookies } from 'react-cookie';
+// import axios from 'axios';
 
 
 const UserQuestion = (props) => {
   const {question} = props;
   // const [currentA, setCurrentA] = useState(currentAnswer);
   // const [answerload, setanswerload] = useState("Update Your Answer");
-  const [cookies] = useCookies(['user']);
+  // const [cookies] = useCookies(['user']);
   // const { question_id } = useParams();
-  const jwttoken = cookies.jwttokenloginuser || "";
+  // const jwttoken = cookies.jwttokenloginuser || "";
 
   // const changetextevent = (event) => {
   //   setCurrentA(event.target.value)
@@ -47,9 +47,9 @@ const UserQuestion = (props) => {
     <>
 
       <tr>
-        <td scope="row">
-          <a href={`/question/${question.id}`}>{question.header}</a>
-        </td>
+        <th scope="row">
+          <a href={`/question/${question._id}`}>{question.header}</a>
+        </th>
         <td>
           {question.liked_by.length}
         </td>

@@ -4,7 +4,7 @@ import { NavForHome } from "../NavBar/NavBar";
 import { SideFeatured } from "../SideFeatured/sidefeatured"
 import Questions from "../Questions/questions"
 import { AskQuestion } from "../AskQuestion/askquestion"
-import $ from "jquery";
+// import $ from "jquery";
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
 import Sidebar from './sidebar.js';
@@ -34,7 +34,7 @@ class homepage extends Component {
   }
 
   render() {
-    const { jwttokenloginusercookie, total_question  ,total_tags} = this.state;
+    const { jwttokenloginusercookie, total_question} = this.state;
 
     let askquestionsign;
     if (jwttokenloginusercookie !== "") {

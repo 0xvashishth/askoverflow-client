@@ -10,8 +10,8 @@ import Questions from "./UserQuestions/Questions";
 
 const userprofile = () => {
   const [cookies] = useCookies(['user']);
-  var imgforload = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="20px" />
-  var imgforload1 = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="70px" />
+  var imgforload = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="20px" alt="#img" />
+  var imgforload1 = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="70px" alt="#img"/>
   const [userData = {}, setUserData] = useState(imgforload);
   const [loaderforwait, setloaderforwait] = useState(imgforload1);
   const [questioncount, setQuestionCount] = useState(imgforload);

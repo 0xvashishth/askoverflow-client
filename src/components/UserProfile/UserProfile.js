@@ -36,7 +36,7 @@ const userprofile = () => {
       userdata.rootUser.avatarlink = "https://avatars.dicebear.com/api/gridy/" + userdataname + ".svg"
 
       setUserData(userdata.rootUser);
-      setQuestionCount(userdata.allquestions);
+      // setQuestionCount(userdata.allquestions);
       setloaderforwait();
       if (res.status !== 200) {
         const error = new Error(res.error);
@@ -205,7 +205,7 @@ const userprofile = () => {
         </div>
 
         <div class="home-content Right-bar" id="user_questions" style={{ display: "none" }}>
-          <Questions />
+          <Questions setCountQuestion={setQuestionCount}/>
         </div>
 
         <div class="home-content Right-bar" id="user_comments" style={{ display: "none" }}>

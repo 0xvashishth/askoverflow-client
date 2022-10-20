@@ -12,6 +12,7 @@ import UserQuestion from "./userquestion";
 
 const Questions = (props) => {
   // const {question} = props;
+  var {setCountQuestion} = props;
   const history = useHistory();
   const [cookies] = useCookies(['user']);
     var imgforload1 = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="70px" alt="#img" />
@@ -39,7 +40,7 @@ const Questions = (props) => {
           const responsedata = await res.json();
           const allquestion = responsedata.map(ans => <UserQuestion question={ans} />);
           setAllQuestions(allquestion);
-
+          setCountQuestion(allquestion.length);
         } catch (err) {
           console.log(err);
           history.push('/');

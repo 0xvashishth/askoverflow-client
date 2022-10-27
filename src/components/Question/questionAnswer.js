@@ -9,12 +9,13 @@ import ShareLink from './ShareLink.js';
 import "./question.css";
 
 const Answer = (props) => {
-  const { answer, mtype, aid } = props;
+  const { answer, mtype, aid, question_owner, question_id } = props;
   // const {key} = props;
   const [cookies] = useCookies(['user']);
+  const [verifyAnswerloading,setverifyAnswerloading] = useState();
   // const [setMarkdownInput] = useState()
   var checkrightvariable = <div><i class="fa fa-check"></i></div>
-  const [checkright] = useState(answer.is_verified ? checkrightvariable : ''); //setcheckright never used
+  const [checkright, setcheckright] = useState(answer.is_verified ? checkrightvariable : ''); //setcheckright never used
   // var linkanswer = "#" + answer._id;
   const [count_vote, setcount_vote] = useState(answer.liked_by.length - answer.unliked_by.length);
   const profile_url = "https://avatars.dicebear.com/api/gridy/" + answer.answered + ".svg";
@@ -58,13 +59,33 @@ const Answer = (props) => {
     }
   }
 
+  const fun_verifyAnswer = async () => {
+    if(window.confirm("Are ou sure? You are verifying this answer!!") == true){
+      setverifyAnswerloading(imgforloadvote)
+      axios.post('https://askoverflow-server.vashishth-patel.repl.co/answerverify', {
+        answerid: answer._id,
+        questionid: question_id,
+        jwttokenloginuser: jwttoken
+      }).then(function(response: AxiosResponse) {
+        setcheckright(checkrightvariable);
+        setverifyAnswerloading('');
+      }).catch(function(error: AxiosError) {
+        window.alert(error.response.data.error);
+      }); 
+    }
+  }
+
 
   const jwttoken1 = cookies.jwttokenloginuser || "";
-  var editAnswerLink = <span className="fc-light mr2" data-toggle="modal" data-target="#loginModal"><a href="#loginModal">edit &nbsp;</a></span>
+  var editAnswerLink = <span className="fc-light mr2" data-toggle="modal" data-target="#loginModal"><a href="#loginModal">&nbsp;edit&nbsp;</a></span>
+  var verifyAnswer="";
 
   if (jwttoken1 !== "") {
+    if(userid === question_owner){
+      verifyAnswer = <span className="fc-light mr2" data-toggle="modal"><button className="btn" onClick={fun_verifyAnswer}>verify</button></span>;
+    }
     if (userid === answer.answered_by) {
-      editAnswerLink = <span className="fc-light mr2" data-toggle="modal" data-target={'#editAnswer' + answer._id}><a href="#editAnswer">edit &nbsp;</a></span>;
+      editAnswerLink = <span className="fc-light mr2" data-toggle="modal" data-target={'#editAnswer' + answer._id}><a href="#editAnswer">&nbsp;edit&nbsp;</a></span>;
     } else {
       editAnswerLink = " ";
     }
@@ -95,7 +116,7 @@ const Answer = (props) => {
             <div className="col-8">
               {/* <span className="fc-light mr2"><a href={linkanswer}>share</a></span> &nbsp; */}
               <ShareLink mylink={answer.answered_by} mtype={mtype} aid={aid} />
-              {editAnswerLink}
+              {editAnswerLink}{verifyAnswer}{verifyAnswerloading}
               {/* edit answer modal start */}
               <div class="modal fade" id={'editAnswer' + answer._id} tabindex="-1" role="dialog" aria-labelledby="editAnswerCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">

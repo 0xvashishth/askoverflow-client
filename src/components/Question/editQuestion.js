@@ -37,7 +37,9 @@ const EditQuestion = (props) => {
     // var textanswertopostvalue = $('.textanswertoedit').val();
     // console.log("herllo", jwttoken, textanswertopostvalue);
     if (editQHeader !== "" || editQBody !== "") {
-      var arraytags = qtags.split(',');
+      var qqtags = qtags;
+      qqtags += '';
+      var arraytags = qqtags.split(',');
       console.log(qid,qbody,jwttoken,arraytags,editQHeader)
       setanswerload("Please Wait For A Moment...");
       axios.post('https://askoverflow-server.vashishth-patel.repl.co/questionedit', {

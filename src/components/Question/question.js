@@ -122,7 +122,7 @@ const Question = (props) => {
   // console.log(allAnswers);
   const allAnswers = question.answers.map((ans) => {
     index++;
-    return <Answer answer={ans} mtype={"answer"} aid={index} />;
+    return <Answer answer={ans} mtype={"answer"} aid={index} question_owner={question.posted_by} question_id={question._id} />;
   });
   var profile_url = "https://avatars.dicebear.com/api/gridy/" + question.asked_by + ".svg";
 

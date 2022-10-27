@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie';
 import { useHistory } from "react-router-dom";
 // import UserQuestion from "./userquestion";
 import Questions from "./UserQuestions/Questions";
+import Answers from "./UserAnswers/Answers";
 
 
 const userprofile = () => {
@@ -15,6 +16,7 @@ const userprofile = () => {
   const [userData = {}, setUserData] = useState(imgforload);
   const [loaderforwait, setloaderforwait] = useState(imgforload1);
   const [questioncount, setQuestionCount] = useState(imgforload);
+  const [CountAnswer, setCountAnswer] = useState(imgforload);
   const history = useHistory();
 
   const callUserPage = async () => {
@@ -155,7 +157,7 @@ const userprofile = () => {
             <div class="box">
               <div class="right-side">
                 <div class="box-topic">Answers</div>
-                <div class="number">38</div>
+                <div class="number">{CountAnswer}</div>
                 <div class="indicator">
                 </div>
               </div>
@@ -194,14 +196,7 @@ const userprofile = () => {
         </div>
 
         <div class="home-content Right-bar" id="user_answers" style={{ display: "none" }}>
-          <div class="container">
-            <h3>Answers</h3>
-            <div class="row container">
-              <div class="col-10 container">
-              </div>
-            </div>
-
-          </div>
+          <Answers setCountAnswer={setCountAnswer}/>
         </div>
 
         <div class="home-content Right-bar" id="user_questions" style={{ display: "none" }}>

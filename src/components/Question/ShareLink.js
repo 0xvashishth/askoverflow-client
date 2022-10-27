@@ -9,7 +9,7 @@ const ShareLink = (props) => {
 
   return (
     <>
-      <span className="fc-light mr2" data-toggle="modal" data-target={"#shareLink" + mylink + mtype + aid}><a href={"#" + mtype + aid}>share</a></span> &nbsp;
+      <span className="fc-light mr2" data-toggle="modal" data-target={"#shareLink" + mylink + mtype + aid}><a href={"#" + mtype + aid}>share</a></span>
 
 
       <div class="modal fade" id={"shareLink" + mylink + mtype + aid} tabindex="-1" role="dialog" aria-labelledby="shareLinkTitle" aria-hidden="true">

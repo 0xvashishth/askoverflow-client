@@ -1,15 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useCookies } from 'react-cookie';
 import { Redirect } from "react-router-dom";
 
 const logoutuser = (props) => {
   const [cookies, removeCookie] = useCookies(['user']);
-  if (cookies.jwttokenloginuser) {
-    removeCookie('jwttokenloginuser', { path: "/" });
-  }
-  if (cookies.userid) {
-    removeCookie('userid', { path: "/" });
-  }
+  // if (cookies.jwttokenloginuser) {
+  //   removeCookie('jwttokenloginuser', { path: "/" });
+  //   console.log("This is removed!");
+  // }
+  // if (cookies.userid) {
+  //   removeCookie('userid', { path: "/" });
+  //   console.log("This is useris removed!");
+  // }
+
+  useEffect(() => {
+   removeCookie('jwttokenloginuser', '');
+    removeCookie('userid', '');
+}, []);
+
+  
   return (
     <div>
       <h1>Logout</h1>

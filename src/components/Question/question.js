@@ -3,7 +3,7 @@ import "./question.css";
 import { NavForHome } from "../NavBar/NavBar";
 import { SideFeatured } from "../SideFeatured/sidefeatured"
 import { AskQuestion } from "../AskQuestion/askquestion"
-import { useParams } from "react-router-dom";
+import { useParams, useHistory  } from "react-router-dom";
 // import $ from "jquery";
 import ReactMarkdown from 'react-markdown'
 import { useEffect, useState } from "react";
@@ -19,11 +19,12 @@ import ShareLink from './ShareLink.js';
 // class Question extends Component {
 const Question = (props) => {
   // render() {
+  const history = useHistory();
   // const question_id = props.match.params.question_id;
   const [cookies] = useCookies(['user']);
   // const [markdownInput, setMarkdownInput] = useState()
   var imgforloadvote = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="15px" alt="#img" />
-  var imgforload = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="60px" alt="#img"/>
+  var imgforload = <img src="https://user-images.githubusercontent.com/76911582/196022890-ace53133-d1ec-49ae-83e0-45135f1116b4.gif" width="60px" alt="#img" />
   const [question_count_vote, setquestion_count_vote] = useState(imgforloadvote);
 
   const { question_id } = useParams(); //this is for function component
@@ -43,7 +44,22 @@ const Question = (props) => {
   const [questiontags, setquestiontags] = useState(imgforload);
 
   // console.log(question_id);
-
+  const deleteQuestion = async () => {
+    console.log("Delete");
+    axios
+      .post(`https://askoverflow-server.vashishth-patel.repl.co/questiondelete`,
+              {
+                questionid: question_id,
+                jwttokenloginuser: jwttoken
+              }
+             )
+      .then(res => {
+        console.log("deleted");
+        window.alert(res.data.message);
+        history.push('/')
+      })
+    .catch(res => window.alert("Error: " + res.data.error));
+  }
   const getquestion = async () => {
     axios
       .get(`https://askoverflow-server.vashishth-patel.repl.co/question?id=${question_id}`)
@@ -114,25 +130,18 @@ const Question = (props) => {
     getquestion();
   }, []);
   let index = 0;
-  // function getAnswerList(ans) {
-  //   index++;
-  //   return <Answer answer={ans} mtype= {"answer"} aid={index} />;
-  // }
-  // const allAnswers = question.answers.map(getAnswerList);
-  // console.log(allAnswers);
   const allAnswers = question.answers.map((ans) => {
     index++;
     return <Answer answer={ans} mtype={"answer"} aid={index} question_owner={question.posted_by} question_id={question._id} />;
   });
   var profile_url = "https://avatars.dicebear.com/api/gridy/" + question.asked_by + ".svg";
 
-  // edit, share and follow for question
-
-  let editQuestionLink = <span className="fc-light mr2" data-toggle="modal" data-target="#loginModal"><a href="#loginModal">edit &nbsp;</a></span>;
-
+  let editQuestionLink = <span>&nbsp;</span>
+  let deleteQuestionLink = <span>&nbsp;</span>
   if (jwttoken !== "") {
     if (userid === question.posted_by) {
-      editQuestionLink = <span className="fc-light mr2" data-toggle="modal" data-target={'#editQuestion' + question._id}><a href="#editQuestion">edit &nbsp;</a></span>;
+      editQuestionLink = <span className="fc-light mr2" data-toggle="modal" data-target={'#editQuestion' + question._id}><a href="#editQuestion">&nbsp;&nbsp;edit &nbsp;</a></span>;
+      deleteQuestionLink = <span className="fc-light mr2"><a href="#deleteQuestion" onClick={deleteQuestion}>delete</a></span>;
     } else {
       editQuestionLink = " ";
     }
@@ -201,6 +210,7 @@ const Question = (props) => {
                     {/* edit answer modal end */}
                     <span className="fc-light mr2"><a href="#hello">follow</a></span> &nbsp;
                   </div>
+                  {deleteQuestionLink}
                 </div>
                 {/* edit share and follow end */}
 

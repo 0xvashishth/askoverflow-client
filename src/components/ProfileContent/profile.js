@@ -29,7 +29,7 @@ const Profileinsmall = (props) => {
           </a>
         </li>
         <li>
-          <a class="dropdown-item" href="/questions">
+          <a class="dropdown-item" href="/user">
             My Questions
           </a>
         </li>

@@ -42,6 +42,10 @@ const UserAnswer = (props) => {
   //   }
   // }
 
+  var isverified = "No";
+  if(answer.is_verified){
+    isverified = "Yes";
+  }
 
   return (
     <>
@@ -60,7 +64,7 @@ const UserAnswer = (props) => {
           {answer.unliked_by.length}
         </td>
         <td>
-          {answer.is_verified}
+          {isverified}
         </td>
       </tr>   
     </>

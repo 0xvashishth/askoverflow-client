@@ -14,8 +14,13 @@ const logoutuser = (props) => {
   // }
 
   useEffect(() => {
-   removeCookie('jwttokenloginuser', '');
-    removeCookie('userid', '');
+
+  if (cookies.jwttokenloginuser) {
+    removeCookie('jwttokenloginuser', '');
+  }
+  if (cookies.userid) {
+     removeCookie('userid', '');
+  }
 }, []);
 
   

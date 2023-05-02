@@ -10,6 +10,10 @@ import "./Questions.css";
 
 const UserQuestion = (props) => {
   const {question} = props;
+  var isverified = "No";
+  if(question.is_answer_verified){
+    isverified = "Yes";
+  }
   // const [currentA, setCurrentA] = useState(currentAnswer);
   // const [answerload, setanswerload] = useState("Update Your Answer");
   // const [cookies] = useCookies(['user']);
@@ -63,7 +67,7 @@ const UserQuestion = (props) => {
           {question.views}
         </td>
         <td>
-          {question.is_answer_verified}
+          {isverified}
         </td>
       </tr>   
     </>

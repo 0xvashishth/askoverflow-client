@@ -60,7 +60,7 @@ const Answer = (props) => {
   }
 
   const fun_verifyAnswer = async () => {
-    if(window.confirm("Are ou sure? You are verifying this answer!!") == true){
+    if(window.confirm("Are ou sure? You are verifying this answer!!") === true){
       setverifyAnswerloading(imgforloadvote)
       axios.post('https://askoverflow-server.vashishth-patel.repl.co/answerverify', {
         answerid: answer._id,

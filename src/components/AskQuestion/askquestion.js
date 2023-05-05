@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./askquestion.css";
 import $ from "jquery";
 import { useCookies } from 'react-cookie';
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 
 const AskQuestion = (props) => {
 
 
   const [cookies] = useCookies(['user']);
+  const [markdownContent, setMarkdownContent] = useState("");
 
   const submitaquestion = () => {
-
     let questionheader = $("#question-header").val();
     let questiontags = $("#question-tags").val();
     let questionbody = $("#question-body").val();
@@ -71,9 +72,13 @@ const AskQuestion = (props) => {
               </div>
               <div class="mb-3">
                 <label for="question-body" class="col-form-label">Question Body</label>
-                <textarea class="form-control" rows="13" placeholder="Please Include Question Body..." id="question-body" name="question-body"></textarea>
+                <textarea class="form-control" rows="13" placeholder="Please Include Question Body..." id="question-body" name="question-body" onChange={(e) => setMarkdownContent(e.target.value)}></textarea>
               </div>
-
+              {markdownContent &&
+                <div class="mb-3 border border-primary rounded-5 p-3">
+                  <ReactMarkdown>{markdownContent}</ReactMarkdown>
+                </div>
+              }
             </form>
           </div>
           <div class="modal-footer">

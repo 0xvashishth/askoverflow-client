@@ -9,10 +9,12 @@ import $ from "jquery";
 import { useState } from "react";
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 
 const AnswerPost = (props) => {
   const [answerload, setanswerload] = useState("Post Your Answer");
+  const [markdownContent, setMarkdownContent] = useState(""); 
   const [cookies] = useCookies(['user']);
   const { question_id } = useParams();
   const jwttoken = cookies.jwttokenloginuser || "";
@@ -71,8 +73,13 @@ const AnswerPost = (props) => {
           <div class="col-12">
 
 
-            <textarea rows="8" class="col-12 textanswertopost1" placeholder="Give your answer" required>
+            <textarea rows="8" class="col-12 textanswertopost1" placeholder="Give your answer" onChange={(e) => setMarkdownContent(e.target.value)} required>
             </textarea>
+            {markdownContent &&
+                <div class="mb-3 border border-dark rounded-5 p-3">
+                  <ReactMarkdown>{markdownContent}</ReactMarkdown>
+                </div>
+              }
             {buttonforanswer}
 
           </div>

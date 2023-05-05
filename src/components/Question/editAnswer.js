@@ -6,18 +6,21 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 
 const EditAnswer = (props) => {
   const {currentAnswer, answerId} = props;
   const [currentA, setCurrentA] = useState(currentAnswer);
+  const [markdownContent, setMarkdownContent] = useState(currentAnswer); 
   const [answerload, setanswerload] = useState("Update Your Answer");
   const [cookies] = useCookies(['user']);
   const { question_id } = useParams();
   const jwttoken = cookies.jwttokenloginuser || "";
 
   const changetextevent = (event) => {
-    setCurrentA(event.target.value)
+    setCurrentA(event.target.value);
+    setMarkdownContent(event.target.value);
   }
 
   const EditAnswerServer = function() {
@@ -70,6 +73,11 @@ const EditAnswer = (props) => {
 
             <textarea name="editAnserTextarea" rows="8" class="col-12 textanswertoedit" placeholder="Give your answer" value={currentA} onChange={changetextevent} required>
             </textarea>
+            {markdownContent &&
+                <div class="mb-3 border border-primary rounded-5 p-3">
+                  <ReactMarkdown>{markdownContent}</ReactMarkdown>
+                </div>
+              }
             <button type="button" class="btn btn-warning col-4" data-dismiss="modal">Close</button>
             <button onClick={EditAnswerServer} class="btn btn-primary col-7 offset-1" >{answerload}</button>
 

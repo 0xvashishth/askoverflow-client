@@ -6,6 +6,7 @@ import "./question.css";
 import { useState, useEffect } from "react";
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 const EditQuestion = (props) => {
   const { questionHeader, questionTags, questionBody, questionId } = props;
@@ -15,14 +16,15 @@ const EditQuestion = (props) => {
   const [qheader, setQheader] = useState(questionHeader);
   const [qtags, setQtags] = useState(questionTags);
   const [qbody, setQbody] = useState(questionBody);
+  const [markdownContent, setMarkdownContent] = useState(questionBody);
   const [qid, setQid] = useState(questionId);
   const [answerload, setanswerload] = useState("Update Your Question");
   // console.log(qheader);
   var jwttoken = cookies.jwttokenloginuser || "";
 
   // This will render only for once, because the props are set initially undefined
-  useEffect(() => { setQheader(questionHeader); setQtags(questionTags); setQbody(questionBody); setQid(questionId); }, [questionHeader,questionTags,questionBody,questionId] )
-  
+  useEffect(() => { setQheader(questionHeader); setQtags(questionTags); setQbody(questionBody); setMarkdownContent(questionBody); setQid(questionId); }, [questionHeader, questionTags, questionBody, questionId])
+
   const editQHeader = (event) => {
     setQheader(event.target.value)
   }
@@ -31,16 +33,17 @@ const EditQuestion = (props) => {
   }
   const editQBody = (event) => {
     setQbody(event.target.value)
+    setMarkdownContent(event.target.value);
   }
 
-    const EditQuestionServer = function() {
+  const EditQuestionServer = function () {
     // var textanswertopostvalue = $('.textanswertoedit').val();
     // console.log("herllo", jwttoken, textanswertopostvalue);
     if (editQHeader !== "" || editQBody !== "") {
       var qqtags = qtags;
       qqtags += '';
       var arraytags = qqtags.split(',');
-      console.log(qid,qbody,jwttoken,arraytags,editQHeader)
+      console.log(qid, qbody, jwttoken, arraytags, editQHeader)
       setanswerload("Please Wait For A Moment...");
       axios.post('https://askoverflow-server.vashishth-patel.repl.co/questionedit', {
         questionid: qid,
@@ -48,10 +51,10 @@ const EditQuestion = (props) => {
         jwttokenloginuser: jwttoken,
         tags: arraytags,
         header: qheader
-      }).then(function(response) {
+      }).then(function (response) {
         console.log(response);
         window.location.replace("/question/" + qid);
-      }).catch(function(err){
+      }).catch(function (err) {
         console.log(err);
         window.alert("Something Went Wrong!!");
       });
@@ -60,7 +63,7 @@ const EditQuestion = (props) => {
       window.alert("All Fields Are Required!");
     }
   }
-  
+
   return (
     <>
       <div class="modal-dialog modal-dialog-centered modal-fullscreen modal-xl ">
@@ -83,7 +86,11 @@ const EditQuestion = (props) => {
                 <label for="editQuestion-body" class="col-form-label">Question Body</label>
                 <textarea value={qbody} onChange={editQBody} class="form-control" rows="13" placeholder="Please Include Question Body..." id="editQuestion-body" name="editQuestion-body"></textarea>
               </div>
-
+              {markdownContent &&
+                <div class="mb-3 border border-primary rounded-5 p-3">
+                  <ReactMarkdown>{markdownContent}</ReactMarkdown>
+                </div>
+              }
             </form>
           </div>
           <div class="modal-footer">

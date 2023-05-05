@@ -4,6 +4,14 @@ import { Redirect } from "react-router-dom";
 
 const logoutuser = (props) => {
   const [cookies, removeCookie] = useCookies(['user']);
+  // if (cookies.jwttokenloginuser) {
+  //   removeCookie('jwttokenloginuser', { path: "/" });
+  //   console.log("This is removed!");
+  // }
+  // if (cookies.userid) {
+  //   removeCookie('userid', { path: "/" });
+  //   console.log("This is useris removed!");
+  // }
 
   useEffect(() => {
 

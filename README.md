@@ -1,30 +1,43 @@
-# Getting Started with Create React App
+<h1 align="center"><img src="https://user-images.githubusercontent.com/76911582/198497528-58826a25-b6ca-40cf-839c-b410c933e9a5.png" width="25px"/> Askoverflow Client <img src="https://user-images.githubusercontent.com/76911582/198497528-58826a25-b6ca-40cf-839c-b410c933e9a5.png" width="25px"/></h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+<h3 align="center">A client for <a href="https://github.com/vasu-1/askoverflow-server">askoverflow server</a></h3>
 
-In the project directory, you can run:
+<div align="center">
+<a href="https://github.com/vasu-1/askoverflow-client"><img src="https://sloc.xyz/github/vasu-1/askoverflow-client?style=for-the-badge" alt="total lines"/></a>
+<a href="https://github.com/vasu-1/askoverflow-client"><img src="https://img.shields.io/github/stars/vasu-1/askoverflow-client" alt="Stars"/></a>
+<a href="https://github.com/vasu-1/askoverflow-client/network/members"><img src="https://img.shields.io/github/forks/vasu-1/askoverflow-client" alt="Forks"/></a>
+<a href="https://github.com/vasu-1/askoverflow-client/commits"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/vasu-1/askoverflow-client?logo=github"></a>
+</div>
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- :link: Link Of Askoverflow Website: [link](https://askoverflow.netlify.app/)
+- :link: Link Of Server: [link](https://askoverflow-server.vashishth-patel.repl.co/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+# Features :chart_with_upwards_trend:
+- It contains JWT Safe Authenticatio login/logout system.
+- All functions will be done with API call.
+- There are some public API calls like, anyone can see all the questions and can see the answers, but cannot do actions which `requires authentication`.
+- Authenticate User can ask/edit/delete the question.
+- Authenticate Users can answer/edit/delete their respective answers.
+- Authenticate User can upvote or downvote the answer only once. Users can not upvote/downvote more than once.
+- Authenticate User and only the owner of the question can verify any particular answer.
+- The client's website also supports Markdown formatting.
+- Authenticate users can see all their answers and all questions posted by him/her can see the data including votes, body, link, etc. on the profile page.
+- Mail will be sent to the user when he/she gets registered(using nodemailer).
+- Only required data will be sent in the response.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+# Tech Stack 👨‍💻
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?logo=javascript&logoColor=%23F7DF1E)
+![React](https://img.shields.io/badge/React-black?logo=JSON%20web%20tokens)
+![REST API](https://img.shields.io/badge/rest%20api%20-%23323330.svg?&logo=rest&logoColor=%23F7DF1E)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+*Show your love by staring my repo !!*

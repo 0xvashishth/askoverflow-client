@@ -47,7 +47,7 @@ const Question = (props) => {
   const deleteQuestion = async () => {
     console.log("Delete");
     axios
-      .post(`https://askoverflow-server.vashishth-patel.repl.co/questiondelete`,
+      .post(`https://askoverflow-server.vercel.app/questiondelete`,
               {
                 questionid: question_id,
                 jwttokenloginuser: jwttoken
@@ -62,7 +62,7 @@ const Question = (props) => {
   }
   const getquestion = async () => {
     axios
-      .get(`https://askoverflow-server.vashishth-patel.repl.co/question?id=${question_id}`)
+      .get(`https://askoverflow-server.vercel.app/question?id=${question_id}`)
       .then(res => {
         var questiontags1 = [];
         questiontags1[0] = <div class="question-div offset-1"></div>
@@ -97,7 +97,7 @@ const Question = (props) => {
       // console.log(vote);
       // console.log(answer._id,jwttoken)
       // JSON.stringify(error)
-      axios.post('https://askoverflow-server.vashishth-patel.repl.co/questionvote', {
+      axios.post('https://askoverflow-server.vercel.app/questionvote', {
         questionid: question._id,
         vote: vote,
         jwttokenloginuser: jwttoken

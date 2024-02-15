@@ -26,7 +26,7 @@ const Answer = (props) => {
 
   const AnswerDataGet = async () => {
         try {
-          const res = await fetch('https://askoverflow-server.vashishth-patel.repl.co/getuseranswers', {
+          const res = await fetch('https://askoverflow-server.vercel.app/getuseranswers', {
             method: "POST",
             headers: {
               Accept: "application/json",
@@ -60,7 +60,7 @@ const Answer = (props) => {
   //   // console.log("herllo", jwttoken, textanswertopostvalue);
   //   if (currentA !== "") {
   //     setanswerload("Please Wait For A Moment...");
-  //     axios.post('https://askoverflow-server.vashishth-patel.repl.co/answeredit', {
+  //     axios.post('https://askoverflow-server.vercel.app/answeredit', {
   //       answerid: answerId,
   //       body: currentA,
   //       jwttokenloginuser: jwttoken

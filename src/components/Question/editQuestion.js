@@ -45,7 +45,7 @@ const EditQuestion = (props) => {
       var arraytags = qqtags.split(',');
       console.log(qid, qbody, jwttoken, arraytags, editQHeader)
       setanswerload("Please Wait For A Moment...");
-      axios.post('https://askoverflow-server.vashishth-patel.repl.co/questionedit', {
+      axios.post('https://askoverflow-server.vercel.app/questionedit', {
         questionid: qid,
         body: qbody,
         jwttokenloginuser: jwttoken,

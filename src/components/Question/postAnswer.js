@@ -24,7 +24,7 @@ const AnswerPost = (props) => {
     // console.log("herllo", jwttoken, textanswertopostvalue1);
     if (textanswertopostvalue1 !== "") {
       setanswerload("Please Wait For A Moment...");
-      axios.post('https://askoverflow-server.vashishth-patel.repl.co/answerpost', {
+      axios.post('https://askoverflow-server.vercel.app/answerpost', {
         questionid: question_id,
         body: textanswertopostvalue1,
         jwttokenloginuser: jwttoken

@@ -25,7 +25,7 @@ const AskQuestion = (props) => {
       console.log(questionbody)
       const postQuestionData = async () => {
         // e.preventDefault();
-        const res = await fetch("https://askoverflow-server.vashishth-patel.repl.co/questionpost", {
+        const res = await fetch("https://askoverflow-server.vercel.app/questionpost", {
           method: "POST",
           headers: {
             Accept: "application/json",

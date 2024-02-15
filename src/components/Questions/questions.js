@@ -27,7 +27,7 @@ class Questions extends Component {
 
 
     axios
-      .get('https://askoverflow-server.vashishth-patel.repl.co/publicquestionsget')
+      .get('https://askoverflow-server.vercel.app/publicquestionsget')
       .then(res => {
         this.setState({
           questions: res.data

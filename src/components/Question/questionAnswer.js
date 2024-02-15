@@ -31,7 +31,7 @@ const Answer = (props) => {
       // console.log(vote);
       // console.log(answer._id,jwttoken)
       // JSON.stringify(error)
-      axios.post('https://askoverflow-server.vashishth-patel.repl.co/answervote', {
+      axios.post('https://askoverflow-server.vercel.app/answervote', {
         answerid: answer._id,
         vote: vote,
         jwttokenloginuser: jwttoken
@@ -62,7 +62,7 @@ const Answer = (props) => {
   const fun_verifyAnswer = async () => {
     if(window.confirm("Are ou sure? You are verifying this answer!!") === true){
       setverifyAnswerloading(imgforloadvote)
-      axios.post('https://askoverflow-server.vashishth-patel.repl.co/answerverify', {
+      axios.post('https://askoverflow-server.vercel.app/answerverify', {
         answerid: answer._id,
         questionid: question_id,
         jwttokenloginuser: jwttoken

@@ -21,7 +21,7 @@ const userprofile = () => {
 
   const callUserPage = async () => {
     try {
-      const res = await fetch('https://askoverflow-server.vashishth-patel.repl.co/user', {
+      const res = await fetch('https://askoverflow-server.vercel.app/user', {
         method: "POST",
         headers: {
           Accept: "application/json",

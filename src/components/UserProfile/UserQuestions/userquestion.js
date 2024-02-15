@@ -29,7 +29,7 @@ const UserQuestion = (props) => {
   //   // console.log("herllo", jwttoken, textanswertopostvalue);
   //   if (currentA !== "") {
   //     setanswerload("Please Wait For A Moment...");
-  //     axios.post('https://askoverflow-server.vashishth-patel.repl.co/answeredit', {
+  //     axios.post('https://askoverflow-server.vercel.app/answeredit', {
   //       answerid: answerId,
   //       body: currentA,
   //       jwttokenloginuser: jwttoken

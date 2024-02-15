@@ -75,7 +75,7 @@ const NavForHome = (props) => {
         let passwordget = user.password;
         const postLoginData = async () => {
           // e.preventDefault();
-          const res = await fetch("https://askoverflow-server.vashishth-patel.repl.co/signin", {
+          const res = await fetch("https://askoverflow-server.vercel.app/signin", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -115,7 +115,7 @@ const NavForHome = (props) => {
       } else {
         const postSignData = async () => {
           // e.preventDefault();
-          const res = await fetch("https://askoverflow-server.vashishth-patel.repl.co/signup", {
+          const res = await fetch("https://askoverflow-server.vercel.app/signup", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
